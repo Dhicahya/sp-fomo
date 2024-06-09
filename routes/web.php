@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SolusiController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,6 @@ Route::get('/', function () {
 Route::get('dashboard', function () {
     return view('pages.admin.dashboard');
 });
+
+Route::get('dashboard/solusi', [SolusiController::class, 'index']);
+

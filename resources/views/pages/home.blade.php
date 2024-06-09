@@ -9,7 +9,7 @@
                 <div class="col-lg-6 d-lg-flex flex-lg-column justify-content-center align-items-stretch pt-5 pt-lg-0 order-2 order-lg-1"
                     data-aos="fade-up">
                     <div>
-                        <h1>App landing page template</h1>
+                        <h1>Sistem Pakar Identifikasi Tingkat FoMO</h1>
                         <h2>Lorem ipsum dolor sit amet, tota senserit percipitur ius ut, usu et fastidii forensibus
                             voluptatibus. His ei nihil feugait</h2>
                         <a href="#" class="download-btn"><i class="bx bxl-play-store"></i> Google Play</a>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-lg-6 d-lg-flex flex-lg-column align-items-stretch order-1 order-lg-2 hero-img"
                     data-aos="fade-up">
-                    <img src="/img/hero-img.png" class="img-fluid" alt="">
+                    <img src="/img/FOMO-amico.png" class="img-fluid" style="height: 90%" alt="">
                 </div>
             </div>
         </div>
