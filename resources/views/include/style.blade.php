@@ -1,6 +1,10 @@
   <!-- Favicons -->
-  <link href="/img/favicon.png" rel="icon">
+  <link href="/assets/img/fomo.png" rel="icon">
   <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+</style>
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">

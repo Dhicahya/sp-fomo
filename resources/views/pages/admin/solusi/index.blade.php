@@ -7,7 +7,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Solusi</h1>
+            <h1 class="h3 mb-0 text-gray-800">Manajemen Solusi</h1>
                 <a href="/admin/solusi/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                     <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Solusi</a>
         </div>
@@ -25,10 +25,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($data as $index => $item)
+                        @foreach ($data as $index => $item)
                     <tr>
                         <th scope="row">{{$index+1}}</th>
-                        <td>{{$item->name}}</td>
+                        <td>{{$item->kategori}}</td>
+                        <td>{{$item->solusi}}</td>
+                        <td>{{$item->bobot_kategori}}</td>
                         <td>
                             <a class="btn btn-primary" href="">
                                 <i class="fas fa-edit"></i>
@@ -38,7 +40,7 @@
                             </a>
                         </td>
                     </tr>
-                    @endforeach --}}
+                    @endforeach
                     </tbody>
                 </table>
             </div>

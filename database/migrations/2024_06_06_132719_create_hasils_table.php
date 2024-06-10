@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Solusi::class);
             $table->string('hasil_kategori');
-            $table->string('bobot');
+            $table->double('bobot');
             $table->timestamps();
         });
     }

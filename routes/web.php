@@ -19,9 +19,13 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
-Route::get('admin', function () {
-    return view('pages.admin.dashboard');
+Route::prefix('/admin/')->group(function(){
+    Route::get('/', function(){return view('pages.admin.dashboard');})->name('dashboard');
+
+    Route::resource('solusi', SolusiController::class);
+
+
 });
 
-Route::get('admin/solusi', [SolusiController::class, 'index']);
+
 
