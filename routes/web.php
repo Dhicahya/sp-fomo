@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SolusiController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 
 
 /*
@@ -23,6 +25,7 @@ Route::prefix('/admin/')->group(function(){
     Route::get('/', function(){return view('pages.admin.dashboard');})->name('dashboard');
 
     Route::resource('solusi', SolusiController::class);
+    Route::get('solusi/{solusi}/delete', [SolusiController::class, 'destroy'])->name('solusi.delete');
 
 
 });

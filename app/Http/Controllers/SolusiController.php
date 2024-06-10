@@ -28,10 +28,10 @@ class SolusiController extends Controller
     {
         $request->validate([
             'kategori' => 'required|string',
-            'solusi' => 'required|text',
-            'bobot_kategori' => 'required|double'
+            'solusi' => 'required|string',
+            'bobot_kategori' => 'required|numeric'
         ]);
-        Category::create($request->all());
+        Solusi::create($request->all());
         return redirect()->route('solusi.index');
     }
 
@@ -58,8 +58,8 @@ class SolusiController extends Controller
     {
         $request->validate([
             'kategori' => 'required|string',
-            'solusi' => 'required|text',
-            'bobot_kategori' => 'required|double'
+            'solusi' => 'required|string',
+            'bobot_kategori' => 'required|numeric'
         ]);
 
         $solusi->update($request->all());

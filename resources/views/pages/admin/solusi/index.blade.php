@@ -32,10 +32,10 @@
                         <td>{{$item->solusi}}</td>
                         <td>{{$item->bobot_kategori}}</td>
                         <td>
-                            <a class="btn btn-primary" href="">
+                            <a class="btn btn-primary" href="{{ route('solusi.edit', $item) }}">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a class="btn btn-danger" onclick="">
+                            <a class="btn btn-danger" onclick="deleteData('{{ route('solusi.delete', $item) }}')">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </td>
