@@ -93,7 +93,7 @@
 
             <!-- Nav Item - user -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="{{ route('user.index') }}">
                     <i class="fa fa-users"></i>
                     <span>Manajemen Data Pengguna</span></a>
             </li>

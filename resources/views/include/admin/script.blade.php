@@ -20,6 +20,12 @@
     <script src=" https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js "></script>
     <script src=" https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js "></script>
 
+    <!-- Page level plugins -->
+    <script src="/assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="/assets/js/demo/datatables-demo.js"></script>
 
 
     <!-- Bootstraps Icon JS File -->

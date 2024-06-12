@@ -27,6 +27,9 @@ Route::prefix('/admin/')->group(function(){
     Route::resource('solusi', SolusiController::class);
     Route::get('solusi/{solusi}/delete', [SolusiController::class, 'destroy'])->name('solusi.delete');
 
+    Route::resource('user', UserController::class);
+    Route::get('user/{user}/delete', [UserController::class, 'destroy'])->name('user.delete');
+
 
 });
 
