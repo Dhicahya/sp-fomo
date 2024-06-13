@@ -39,6 +39,6 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#SolusiTable').DataTable();
+        $('#dataTable').DataTable();
     });
 </script>

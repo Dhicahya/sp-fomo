@@ -15,7 +15,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="dataTable" class="table table-striped table-bordered" style="width: 100%">
+                    <table id="dataTable" class="table table-striped table-bordered display" style="width: 100%">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
