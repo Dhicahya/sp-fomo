@@ -226,8 +226,8 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('solusi.index') }}">
-          <i class="bi bi-file-earmark"></i>
-          <span>Blank</span>
+          <i class="bi bi-lightbulb"></i>
+          <span>Manajemen Kategori dan Solusi</span>
         </a>
       </li><!-- End Blank Page Nav -->
 

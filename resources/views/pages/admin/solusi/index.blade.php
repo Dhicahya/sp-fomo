@@ -3,12 +3,11 @@
 @section('content')
 
 <div class="pagetitle">
-      <h1>Data Tables</h1>
+      <h1>Manajemen Kategori dan Solusi</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-          <li class="breadcrumb-item">Tables</li>
-          <li class="breadcrumb-item active">Data</li>
+          <li class="breadcrumb-item active">Kategori dan Solusi</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -19,9 +18,7 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Datatables</h5>
-              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p>
-
+              <h5 class="card-title">Data Kategori dan Solusi</h5>
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
@@ -39,13 +36,13 @@
                         <th scope="row">{{$index+1}}</th>
                         <td>{{$item->kategori}}</td>
                         <td>{{ $item->solusi }}</td>
-                        <td>{{ $item->bobot }}</td>
+                        <td>{{ $item->bobot_kategori }}</td>
                         <td>
                             <a class="btn btn-primary" href="{{route('solusi.edit', $item)}}">
-                                <i class="fas fa-edit"></i>
+                                <i class="bi bi-pencil-square"></i>
                             </a>
                             <a class="btn btn-danger" onclick="deleteData('{{route('solusi.delete', $item)}}')">
-                                <i class="fas fa-trash-alt"></i>
+                                <i class="bi bi-trash3"></i>
                             </a>
                         </td>
                     </tr>
