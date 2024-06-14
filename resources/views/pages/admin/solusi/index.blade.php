@@ -1,60 +1,64 @@
 @extends('layouts.admin')
 
-@section('title', 'Solusi')
-
 @section('content')
-    <div class="container-fluid">
 
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Manajemen Solusi</h1>
-                <a href="/admin/solusi/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                    <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Solusi</a>
-        </div>
+<div class="pagetitle">
+      <h1>Data Tables</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+          <li class="breadcrumb-item">Tables</li>
+          <li class="breadcrumb-item active">Data</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
 
-        <div class="card">
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
             <div class="card-body">
-                <div class="table-responsive">
-                    <table id="dataTable" class="table table-striped table-bordered display" style="width: 100%">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Kategori</th>
-                            <th scope="col">Solusi</th>
-                            <th scope="col">Bobot Range</th>
-                            <th scope="col">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data as $index => $item)
+              <h5 class="card-title">Datatables</h5>
+              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p>
+
+              <!-- Table with stripped rows -->
+              <table class="table datatable">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Kategori</th>
+                        <th scope="col">Solusi</th>
+                        <th scope="col">Bobot</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  @foreach ($data as $index=>$item)
                     <tr>
                         <th scope="row">{{$index+1}}</th>
                         <td>{{$item->kategori}}</td>
-                        <td>{{$item->solusi}}</td>
-                        <td>{{$item->bobot_kategori}}</td>
+                        <td>{{ $item->solusi }}</td>
+                        <td>{{ $item->bobot }}</td>
                         <td>
-                            <a class="btn btn-primary" href="{{ route('solusi.edit', $item) }}">
+                            <a class="btn btn-primary" href="{{route('solusi.edit', $item)}}">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a class="btn btn-danger" onclick="deleteData('{{ route('solusi.delete', $item) }}')">
+                            <a class="btn btn-danger" onclick="deleteData('{{route('solusi.delete', $item)}}')">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </td>
                     </tr>
                     @endforeach
-                    </tbody>
-                </table>
-                </div>
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+
             </div>
+          </div>
+
         </div>
-    </div>
-    <script>
-        function deleteData(url) {
-            if (confirm("Yakin?")) {
-                window.location.href = url;
-            }
-        }
-    </script>
-    <!-- /.container-fluid -->
+      </div>
+    </section>
 
 @endsection

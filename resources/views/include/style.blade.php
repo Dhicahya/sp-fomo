@@ -1,5 +1,5 @@
   <!-- Favicons -->
-  <link href="/assets/img/fomo.png" rel="icon">
+  <link href="/img/fomo-logo.png" rel="icon">
   <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <style>
