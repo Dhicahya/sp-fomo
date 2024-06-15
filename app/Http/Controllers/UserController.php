@@ -29,12 +29,21 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nama' => 'required|string',
+            'name' => 'required|string',
             'username' => 'required|string',
             'email' => 'required|string',
             'password' => 'required|string',
+            'image_path' => 'nullable|file',
+            'role' => 'required|in:admin,user',
             'instansi' => 'required|string'          
         ]);
+
+        if (@$data['image_path']) {
+            $ext = $request->file('image_path')->getClientOriginalExtension();
+            // save to storage
+            $data['image_path'] = $request->file('image_path')->storeAs('public/profile', time().Str::slug($request->nama) . '.' . $ext);
+            $data['image_path'] = str_replace('public/', '', $data['image_path']);
+        }
 
         User::create($data);
         return redirect()->route('user.index');
@@ -62,15 +71,24 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $data = $request->validate([
-            'nama' => 'required|string',
+            'name' => 'required|string',
             'username' => 'required|string',
             'email' => 'required|string',
             'password' => 'required|string',
+            'image_path' => 'nullable|file',
+            'role' => 'required|in:admin,user',
             'instansi' => 'required|string' 
         ]);
 
         if ($data['password'] == ''){
             unset($data['password']);
+        }
+
+        if (@$data['image_path']) {
+            $ext = $request->file('image_path')->getClientOriginalExtension();
+            // save to storage
+            $data['image_path'] = $request->file('image_path')->storeAs('public/profile', time().Str::slug($request->nama) . '.' . $ext);
+            $data['image_path'] = str_replace('public/', '', $data['image_path']);
         }
 
         $user->update($data);

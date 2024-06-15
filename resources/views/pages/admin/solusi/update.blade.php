@@ -21,9 +21,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">General Form Elements</h5>
-
                         <!-- General Form Elements -->
-                        <form action="{{ route('solusi.update', $solusi) }}" method="POST" enctype="multipart/form-data" >
+                        <form action="{{ route('solusi.update', $solusi) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">

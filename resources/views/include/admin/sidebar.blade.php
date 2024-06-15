@@ -218,7 +218,7 @@
       </li><!-- End Login Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-error-404.html">
+        <a class="nav-link collapsed" href="{{ route('user.index') }}">
           <i class="bi bi-dash-circle"></i>
           <span>Error 404</span>
         </a>
@@ -227,7 +227,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('solusi.index') }}">
           <i class="bi bi-lightbulb"></i>
-          <span>Manajemen Kategori dan Solusi</span>
+          <span>Kelola Kategori dan Solusi</span>
         </a>
       </li><!-- End Blank Page Nav -->
 

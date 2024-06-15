@@ -1,78 +1,78 @@
 @extends('layouts.admin')
 
-@section('title', 'User')
-
 @section('content')
-    <div class="container-fluid">
 
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">User</h1>
-            <a href="/admin/user/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-plus fa-sm text-white-50"></i> Tambah User</a>
-        </div>
+<div class="pagetitle">
+      <h1>Manajemen Data Pengguna</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+          <li class="breadcrumb-item active">Data Pengguna</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
 
-        <div class="card">
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
             <div class="card-body">
-                <table id="dataTable" class="table table-striped table-bordered dataTables_length" style="width: 100%">
-                    <thead>
-                        <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Foto</th>
-                            <th scope="col">Nama</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{-- @foreach ($data as $index => $item)
-                            <tr>
-                                <th scope="row">{{ $index + 1 }}</th>
-                                <td>
-                                    @if ($item->image_path)
-                                        <img src="/storage/{{ $item->image_path }}" style="height: 50px"
-                                            alt="Profile Picture">
-                                    @else
-                                        <img src="/img/undraw_profile.svg" style="height: 50px" alt="Profile Picture">
-                                    @endif
-                                </td>
-                                <td>{{ $item->nama }}</td>
-                                <td>{{ $item->username }}</td>
-                                <td>{{ $item->email }}</td>
-                                <td>
-                                    <div class="custom-control custom-switch">
-                                        <input onclick="window.location.href='{{ route('user.status', $item) }}'"
-                                            {{ $item->status ? 'checked' : '' }} type="checkbox"
-                                            class="custom-control-input" id="customSwitch{{ $index }}">
-                                        <label class="custom-control-label" for="customSwitch{{ $index }}">
-                                            {{ $item->status ? 'Available' : 'Not Available Now' }}
-                                        </label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <a class="btn btn-primary" href="{{ route('user.edit', $item) }}">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <a class="btn btn-danger" onclick="deleteData('{{ route('user.delete', $item) }}')">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach --}}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="card-title ">Data Pengguna</h5>
+                <a href="/admin/user/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                  <i class="fas fa-plus fa-sm text-white-50"></i> Tambah User</a>
+              </div>
+              
+              <!-- Table with stripped rows -->
+              <table class="table datatable">
+                <thead>
+                    <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">Foto</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Instansi</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  @foreach ($data as $index=>$item)
+                    <tr>
+                        <th scope="row">{{$index+1}}</th>
+                        <td>
+                            @if ($item->image_path)
+                                <img src="/storage/{{ $item->image_path }}" style="height: 50px" alt="Profile Picture">
+                            @else
+                                <img src="/img/undraw_profile.svg" style="height: 50px" alt="Profile Picture">
+                            @endif
+                        </td>
+                        <td>{{$item->name}}</td>
+                        <td>{{ $item->username }}</td>
+                        <td>{{ $item->email }}</td>
+                        <td>{{ $item->instansi }}</td>
+                        <td>{{ $item->role }}</td>
+                        <td>
+                            <a class="btn btn-success" href="{{route('user.edit', $item)}}">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <a class="btn btn-danger" onclick="deleteData('{{route('user.delete', $item)}}')">
+                                <i class="bi bi-trash3"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
 
-    </div>
-    {{-- <script>
-        function deleteData(url) {
-            if (confirm("Yakin?")) {
-                window.location.href = url;
-            }
-        }
-    </script> --}}
-    <!-- /.container-fluid -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
 @endsection

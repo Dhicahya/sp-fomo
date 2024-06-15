@@ -38,7 +38,7 @@
                         <td>{{ $item->solusi }}</td>
                         <td>{{ $item->bobot_kategori }}</td>
                         <td>
-                            <a class="btn btn-primary" href="{{route('solusi.edit', $item)}}">
+                            <a class="btn btn-success" href="{{route('solusi.edit', $item)}}">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
                             <a class="btn btn-danger" onclick="deleteData('{{route('solusi.delete', $item)}}')">
@@ -50,10 +50,8 @@
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
-
             </div>
           </div>
-
         </div>
       </div>
     </section>

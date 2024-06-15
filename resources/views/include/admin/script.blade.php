@@ -10,3 +10,16 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('assets/js/main.js') }}"></script>
+
+  {{-- Box Icons JS Files --}}
+  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+
+  {{-- hapus data --}}
+  <script>
+      function deleteData(url) {
+          if (confirm("Yakin?")) {
+              window.location.href = url;
+          }
+      }
+  </script>
