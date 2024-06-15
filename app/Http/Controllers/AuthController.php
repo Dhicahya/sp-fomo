@@ -3,62 +3,79 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class AuthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function register(Request $request)
     {
-        //
+        return view('auth.register');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function registerStore(Request $request)
     {
-        //
+        $request->validate([
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'confirmed','min:8'],
+            'name' => ['required', 'string'],
+            'username' => ['required', 'string'],
+            'instansi' => ['required', 'string']
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            $user = User::create($request->all());
+            DB::commit();
+
+            return redirect()->route('login');
+
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function login(Request $request)
     {
-        //
+        return view("auth.login");
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function loginStore(Request $request)
     {
-        //
+        $credentials = $request->validate([
+            'email' => ['required', 'email', 'exists:users,email'],
+            'password' => ['required']
+        ],[
+            'email.exists'=>'Email belum terdaftar.'
+        ]);
+
+        // if (!User::where('email', $credentials['email'])->where('status', true)->first()) {
+        //     return back()->withErrors([
+        //     'email' => 'Akun Diblokir oleh Admin!',
+        // ])->onlyInput('email');
+        // }
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            if(auth()->user()->role == 'admin'){
+                return redirect()->route('dashboard');
+            }
+
+            return redirect()->route('/');
+        }
+
+        return back()->withErrors([
+            'password' => 'Password Salah!',
+        ])->onlyInput('email');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function logout(Request $request)
     {
-        //
+        Auth::logout();
+        return redirect()->route('login');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
