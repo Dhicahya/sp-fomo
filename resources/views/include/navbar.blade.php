@@ -2,10 +2,9 @@
     <header id="header" class="fixed-top  header-transparent ">
         <div class="container d-flex align-items-center justify-content-between">
 
-            <div class="logo">
-                <h1><a href="index.html">SPATIFOMO</a></h1>
-                <!-- Uncomment below if you prefer to use an image logo -->
-                {{-- <a href="index.html"><img src="/img/logo.png" alt="" class="img-fluid"></a> --}}
+            <div class="logo d-flex align-items-center">
+                <a href="{{ route('home') }}"><img src="/img/fomo-logo.png" alt="" class="img-fluid"></a>
+                <h1><a href="{{ route('home') }}">SPATIFOMO</a></h1>
             </div>
 
             <nav id="navbar" class="navbar">

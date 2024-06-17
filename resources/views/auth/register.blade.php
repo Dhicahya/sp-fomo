@@ -21,7 +21,7 @@
                             @endif
                             <form method="POST" action="{{ route('registerStore') }}">
                                 @csrf
-                                <div class="form-floating my-2">
+                                <div class="form-floating mt-5 mb-2">
                                     <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}"
                                         placeholder="Nama" required>
                                     <label for="name">Nama</label>
@@ -60,7 +60,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block my-4">
+                                <button type="submit" class="btn btn-primary btn-block mt-4">
 									<i class="bi bi-box-arrow-in-right"></i>Register
 								</button>
                             </form>

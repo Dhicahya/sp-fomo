@@ -17,9 +17,7 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
+Route::get('/', function () {return view('pages.home');})->name('home');
 
 Route::prefix('/admin/')->group(function(){
     Route::get('/', function(){return view('pages.admin.dashboard');})->name('dashboard');

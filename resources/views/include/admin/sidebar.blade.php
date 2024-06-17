@@ -219,17 +219,17 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('user.index') }}">
-          <i class="bi bi-dash-circle"></i>
-          <span>Error 404</span>
+          <i class="bi bi-people"></i>
+          <span>Kelola Data Pengguna</span>
         </a>
-      </li><!-- End Error 404 Page Nav -->
+      </li><!-- End Kelola Data Pengguna Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('solusi.index') }}">
           <i class="bi bi-lightbulb"></i>
           <span>Kelola Kategori dan Solusi</span>
         </a>
-      </li><!-- End Blank Page Nav -->
+      </li><!-- End Kelola Kategori dan Solusi Page Nav -->
 
     </ul>
 
