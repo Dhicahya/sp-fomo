@@ -21,7 +21,7 @@
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="card-title ">Data Pengguna</h5>
                 <a href="/admin/user/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                  <i class="fas fa-plus fa-sm text-white-50"></i> Tambah User</a>
+                  <i class="bi bi-plus-lg"></i> User</a>
               </div>
               
               <!-- Table with stripped rows -->
