@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('kriterias', function (Blueprint $table) {
             $table->id();
-            $table->string('kriteria');
+            $table->string('nama');
             $table->string('kode_kriteria');
             $table->text('deskripsi');
             $table->timestamps();

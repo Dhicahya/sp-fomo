@@ -10,7 +10,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-     public function index()
+    public function index()
     {
         $data = User::all();
         return view('pages.admin.user.index', compact('data'));
@@ -75,7 +75,7 @@ class UserController extends Controller
             'name' => 'required|string',
             'username' => 'required|string',
             'email' => 'required|string',
-            'password' => 'required|string',
+            'password' => 'nullable|string',
             'image_path' => 'nullable|file',
             'role' => 'required|in:admin,user',
             'instansi' => 'required|string'  

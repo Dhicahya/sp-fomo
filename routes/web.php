@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\SolusiController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AuthController;
 
 
 /*
@@ -27,6 +28,9 @@ Route::prefix('/admin/')->group(function(){
 
     Route::resource('user', UserController::class);
     Route::get('user/{user}/delete', [UserController::class, 'destroy'])->name('user.delete');
+
+    Route::resource('kriteria', KriteriaController::class);
+    Route::get('kriteria/{kriteria}/delete', [KriteriaController::class, 'destroy'])->name('kriteria.delete');
 
 
 });

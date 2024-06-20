@@ -23,6 +23,15 @@
                         <h5 class="card-title">General Form Elements</h5>
                         <!-- General Form Elements -->
                         <form action="{{ route('user.update', $user) }}" method="POST" enctype="multipart/form-data">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             @csrf
                             @method('PUT')
                             <div class="mb-3">

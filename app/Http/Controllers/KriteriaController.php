@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Kriteria;
 use Illuminate\Http\Request;
 
@@ -10,7 +9,7 @@ class KriteriaController extends Controller
     /**
      * Display a listing of the resource.
      */
-     public function index()
+    public function index()
     {
         $data = Kriteria::all();
         return view('pages.admin.kriteria.index', compact('data'));
@@ -21,8 +20,7 @@ class KriteriaController extends Controller
      */
     public function create()
     {
-        $kriteria = Kriteria::all();
-        return view('pages.admin.kriteria.create', compact('kriteria'));
+        return view('pages.admin.kriteria.create');
     }
 
     /**
@@ -30,12 +28,13 @@ class KriteriaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'nama' => 'required|string',
             'kode_kriteria' => 'required|string',
-            'deskripsi' => 'required|string'
+            'deskripsi' => 'required|string'        
         ]);
-        Kriteria::create($request->all());
+
+        Kriteria::create($data);
         return redirect()->route('kriteria.index');
     }
 
@@ -50,24 +49,24 @@ class KriteriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Kriteria $kriteria)
+    public function edit(Kriteria $kriterium)
     {
-        return view('pages.admin.kriteria.update', compact('kriteria'));
+        return view('pages.admin.kriteria.update', compact('kriterium'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Kriteria $kriteria)
+    public function update(Request $request, Kriteria $kriterium)
     {
-        $request->validate([
+        $data = $request->validate([
             'nama' => 'required|string',
             'kode_kriteria' => 'required|string',
-            'deskripsi' => 'required|string'
+            'deskripsi' => 'required|string'   
         ]);
 
-        $kriteria->update($request->all());
-        return redirect()-> route('kriteria.index');
+        $kriterium->update($data);
+        return redirect()->route('kriteria.index');
     }
 
     /**
@@ -76,6 +75,6 @@ class KriteriaController extends Controller
     public function destroy(Kriteria $kriteria)
     {
         $kriteria->delete();
-        return redirect()->route('kriteria.index');    
+        return redirect()->route('kriteria.index');
     }
 }

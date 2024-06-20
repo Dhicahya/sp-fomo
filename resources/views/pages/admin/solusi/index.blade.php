@@ -18,7 +18,11 @@
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Data Kategori dan Solusi</h5>
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="card-title ">Data Solusi</h5>
+                <a href="{{ route('solusi.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                  <i class="bi bi-plus-lg"></i> Solusi</a>
+              </div>
               <!-- Table with stripped rows -->
               <table class="table datatable">
                 <thead>
