@@ -1214,10 +1214,11 @@ h6 {
 # Footer
 --------------------------------------------------------------*/
 .footer {
-  padding: 20px 0;
+  padding: 2rem 0;
   font-size: 14px;
   transition: all 0.3s;
   border-top: 1px solid #cddfff;
+  flex-shrink: 0;
 }
 
 .footer .copyright {

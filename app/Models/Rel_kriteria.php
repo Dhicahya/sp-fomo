@@ -5,10 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kriteria extends Model
+class Rel_kriteria extends Model
 {
     use HasFactory;
-
-    protected $guarded = [];
-    
 }

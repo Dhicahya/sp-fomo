@@ -5,14 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Indikator extends Model
+class Rel_indikator extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
-
-    public function kriteria() : BelongsTo {
-        return $this->belongsTo(Kriteria::class);
-    }
-
 }

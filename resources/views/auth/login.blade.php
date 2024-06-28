@@ -19,7 +19,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form method="POST" action="{{ route('loginStore') }}">
+                            <form method="POST" action="{{ route('loginStore') }}" class="php-email-forum">
                                 @csrf
                                 <div class="form-floating mt-5 mb-2">
                                     <input type="email" class="form-control" id="email"name="email"

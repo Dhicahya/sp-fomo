@@ -104,17 +104,4 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('user.index');
     }
-
-    // public function status(User $user)
-    // {
-    //     if ($user->id == 1) {
-    //         return redirect()->route('user.index')->withErrors([
-    //             'status' => 'Tidak dapat mengubah status Super Admin!'
-    //         ]);
-    //     }
-        
-    //     $user->status = !$user->status;
-    //     $user->save();
-    //     return redirect()-> route('user.index');
-    // }
 }

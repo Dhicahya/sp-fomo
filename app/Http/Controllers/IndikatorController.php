@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Indikator;
+use App\Models\Kriteria;
 use Illuminate\Http\Request;
 
 class IndikatorController extends Controller
@@ -12,54 +13,51 @@ class IndikatorController extends Controller
      */
     public function index()
     {
-        //
+        $data = Indikator::all();
+        return view('pages.admin.indikator.index', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $kriteria = Kriteria::all();
+        return view('pages.admin.indikator.create', compact('kriteria'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'nama' => 'required|string',
+            'kode_indikator' => 'required|string',
+            'nilai_pakar' => 'nullable|numeric',
+            'kriteria_id' => 'required|exists:kriterias,id',
+        ]);
+
+        Indikator::create($data);
+        return redirect()->route('indikator.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Indikator $indikator)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Indikator $indikator)
     {
-        //
+        $kriteria = Kriteria::all();
+        return view('pages.admin.indikator.edit', compact('indikator', 'kriteria'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Indikator $indikator)
     {
-        //
+        $data = $request->validate([
+            'nama' => 'required|string',
+            'kode_indikator' => 'required|string',
+            'nilai_pakar' => 'nullable|numeric',
+            'kriteria_id' => 'required|exists:kriterias,id',
+        ]);
+
+        $indikator->update($data);
+        return redirect()->route('indikator.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Indikator $indikator)
     {
-        //
+        $indikator->delete();
+        return redirect()->route('indikator.index');
     }
 }
