@@ -41,7 +41,7 @@
                         <th scope="row">{{$index+1}}</th>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->kode_indikator }}</td>
-                        <td>{{ $item->kriteria->name }}</td>
+                        <td>{{ $item->kriteria->nama }}</td>
                         <td>
                             <a class="btn btn-success" href="{{route('kriteria.edit', $item)}}">
                                 <i class="bi bi-pencil-square"></i>

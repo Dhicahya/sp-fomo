@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('kode_indikator');
-            $table->double('nilai_pakar');
+            $table->double('nilai_pakar')->nullable();
             $table->foreignIdFor(Kriteria::class);
             $table->timestamps();
         });
