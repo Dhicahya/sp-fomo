@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IndikatorController;
 use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\SolusiController;
 use App\Http\Controllers\UserController;
 
@@ -35,6 +36,9 @@ Route::prefix('/admin/')->group(function(){
 
     Route::resource('indikator', IndikatorController::class);
     Route::get('indikator/{indikator}/delete', [IndikatorController::class, 'destroy'])->name('indikator.delete');
+
+    Route::resource('pertanyaan', PertanyaanController::class);
+    Route::get('pertanyaan/{pertanyaan}/delete', [PertanyaanController::class, 'destroy'])->name('pertanyaan.delete');
 
 });
 

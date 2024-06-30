@@ -32,6 +32,10 @@ class IndikatorController extends Controller
             'kriteria_id' => 'required|exists:kriterias,id',
         ]);
 
+        if (!isset($data['nilai_pakar'])) {
+            $data['nilai_pakar'] = 0.0;
+        }
+
         Indikator::create($data);
         return redirect()->route('indikator.index');
     }
@@ -39,7 +43,7 @@ class IndikatorController extends Controller
     public function edit(Indikator $indikator)
     {
         $kriteria = Kriteria::all();
-        return view('pages.admin.indikator.edit', compact('indikator', 'kriteria'));
+        return view('pages.admin.indikator.update', compact('indikator', 'kriteria'));
     }
 
     public function update(Request $request, Indikator $indikator)
@@ -50,6 +54,10 @@ class IndikatorController extends Controller
             'nilai_pakar' => 'nullable|numeric',
             'kriteria_id' => 'required|exists:kriterias,id',
         ]);
+
+        if (!isset($data['nilai_pakar'])) {
+            $data['nilai_pakar'] = 0.0;
+        }
 
         $indikator->update($data);
         return redirect()->route('indikator.index');

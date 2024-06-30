@@ -32,12 +32,12 @@ class KriteriaController extends Controller
         return redirect()->route('kriteria.index');
     }
 
-    public function edit(Kriteria $kriteria)
+    public function edit(Kriteria $kriterium)
     {
-        return view('pages.admin.kriteria.edit', compact('kriteria'));
+        return view('pages.admin.kriteria.update', compact('kriterium'));
     }
 
-    public function update(Request $request, Kriteria $kriteria)
+    public function update(Request $request, Kriteria $kriterium)
     {
         $data = $request->validate([
             'nama' => 'required|string',
@@ -45,7 +45,7 @@ class KriteriaController extends Controller
             'deskripsi' => 'required|string',
         ]);
 
-        $kriteria->update($data);
+        $kriterium->update($data);
         return redirect()->route('kriteria.index');
     }
 

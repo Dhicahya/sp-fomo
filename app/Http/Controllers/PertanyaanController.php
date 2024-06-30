@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pertanyaan;
+use App\Models\Indikator;
+use App\Models\Kriteria;
 use Illuminate\Http\Request;
 
 class PertanyaanController extends Controller
@@ -12,54 +14,54 @@ class PertanyaanController extends Controller
      */
     public function index()
     {
-        //
+        $data = Pertanyaan::with('kriteria', 'indikator')->get();
+        return view('pages.admin.pertanyaan.index', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $kriteria = Kriteria::all();
+        $indikator = Indikator::all();
+        return view('pages.admin.pertanyaan.create', compact('kriteria', 'indikator'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'pertanyaan' => 'required|string',
+            'kode_pertanyaan' => 'required|string',
+            'bobot' => 'nullable|exists:indikator,id',
+            'kriteria_id' => 'required|exists:kriterias,id',
+            'indikator_id' => 'required|exists:indikators,id',
+        ]);
+
+        Pertanyaan::create($data);
+        return redirect()->route('pertanyaan.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Pertanyaan $pertanyaan)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Pertanyaan $pertanyaan)
     {
-        //
+        $data = Pertanyaan::with('kriteria', 'indikator')->get();
+        return view('pages.admin.pertanyaan.update', compact('pertanyaan', 'data'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Pertanyaan $pertanyaan)
     {
-        //
+        $data = $request->validate([
+            'pertanyaan' => 'required|string',
+            'kode_pertanyaan' => 'required|string',
+            'bobot' => 'nullable|exists:indikator,id',
+            'kriteria_id' => 'required|exists:kriterias,id',
+            'indikator_id' => 'required|exists:indikators,id',
+        ]);
+
+        $pertanyaan->update($data);
+        return redirect()->route('pertanyaan.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Pertanyaan $pertanyaan)
     {
-        //
+        $pertanyaan->delete();
+        return redirect()->route('pertanyaan.index');
     }
 }
