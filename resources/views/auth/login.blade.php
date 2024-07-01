@@ -31,7 +31,7 @@
                                         placeholder="Masukkan Password" required>
                                     <div class="input-group-append">
                                         <span class="input-group-text" id="togglePassword">
-                                            <i class="bi bi-eye-slash"></i>
+                                            <i class="bi bi-eye"></i>
                                         </span>
                                     </div>
                                 </div>

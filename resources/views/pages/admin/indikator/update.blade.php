@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit Kriteria')
+@section('title', 'Edit Indikator')
 
 @section('content')
     <div class="pagetitle">
-        <h1>Tambah Kriteria</h1>
+        <h1>Edit Indikator</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>

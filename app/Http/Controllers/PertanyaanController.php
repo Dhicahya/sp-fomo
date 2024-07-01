@@ -41,8 +41,9 @@ class PertanyaanController extends Controller
 
     public function edit(Pertanyaan $pertanyaan)
     {
-        $data = Pertanyaan::with('kriteria', 'indikator')->get();
-        return view('pages.admin.pertanyaan.update', compact('pertanyaan', 'data'));
+        $kriteria = Kriteria::all();
+        $indikator = Indikator::all();
+        return view('pages.admin.pertanyaan.update', compact('pertanyaan', 'kriteria', 'indikator'));
     }
 
     public function update(Request $request, Pertanyaan $pertanyaan)
