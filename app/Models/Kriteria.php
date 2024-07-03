@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use app\Model\Indikator;
-use app\Model\Pertanyaan;
+use app\Models\Indikator;
+use app\Models\Pertanyaan;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Kriteria extends Model
 {

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Kriteria;
 use App\Models\Pertanyaan;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Indikator extends Model
 {

@@ -36,16 +36,6 @@
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
-                                <label for="pertanyaan" class="form-label">Pertanyaan</label>
-                                <input type="text" name="pertanyaan" class="form-control" id="pertanyaan"
-                                    value="{{ $pertanyaan->pertanyaan }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="kode_pertanyaan" class="form-label">Kode Pertanyaan</label>
-                                <input type="text" name="kode_pertanyaan" class="form-control" id="kode_pertanyaan"
-                                    value="{{ $pertanyaan->kode_pertanyaan }}" required>
-                            </div>
-                            <div class="mb-3">
                                 <label for="kriteria_id" class="form-label">Kriteria</label>
                                 <select name="kriteria_id" id="kriteria_id" class="form-select" required>
                                     <option value="" selected disabled>-- Pilih Kriteria --</option>
@@ -62,6 +52,16 @@
                                         <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pertanyaan" class="form-label">Pertanyaan</label>
+                                <input type="text" name="pertanyaan" class="form-control" id="pertanyaan"
+                                    value="{{ $pertanyaan->pertanyaan }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="kode_pertanyaan" class="form-label">Kode Pertanyaan</label>
+                                <input type="text" name="kode_pertanyaan" class="form-control" id="kode_pertanyaan"
+                                    value="{{ $pertanyaan->kode_pertanyaan }}" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Ubah</button>
                         </form><!-- End General Form Elements -->

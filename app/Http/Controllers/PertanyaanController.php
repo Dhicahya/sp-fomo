@@ -14,15 +14,22 @@ class PertanyaanController extends Controller
      */
     public function index()
     {
+
         $data = Pertanyaan::with('kriteria', 'indikator')->get();
         return view('pages.admin.pertanyaan.index', compact('data'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $kriteria = Kriteria::all();
-        $indikator = Indikator::all();
-        return view('pages.admin.pertanyaan.create', compact('kriteria', 'indikator'));
+        $indikator = collect(); // Default: empty collection
+
+        $selectedKriteriaId = $request->input('kriteria_id');
+
+        if ($selectedKriteriaId) {
+            $indikator = Indikator::where('kriteria_id', $selectedKriteriaId)->get();
+        }// Query berdasarkan kriteria_id yang dipilih
+        return view('pages.admin.pertanyaan.create', compact('kriteria', 'indikator', 'selectedKriteriaId'));
     }
 
     public function store(Request $request)
