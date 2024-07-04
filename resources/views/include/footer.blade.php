@@ -1,5 +1,5 @@
     <!-- ======= Footer ======= -->
-    <footer id="footer">
+    <footer id="footer" class="mt-auto">
         <div class="container py-4">
             <div class="copyright">
                 &copy; Copyright <strong><span>Spatifomo</span></strong>. All Rights Reserved

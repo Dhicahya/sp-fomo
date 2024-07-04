@@ -26,7 +26,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end shadow animated--grow-in" aria-labelledby="userDropdown">
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ route('profil') }}">
                                 <i class="bi bi-person-fill me-2"></i> Profile
                             </a>
                         </li>

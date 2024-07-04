@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IndikatorController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\PertanyaanController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\SolusiController;
 use App\Http\Controllers\UserController;
 
@@ -37,3 +38,9 @@ Route::post("login", [AuthController::class, 'loginStore'])->name('loginStore');
 Route::get("logout", [AuthController::class, 'logout'])->name('logout');
 Route::get("register", [AuthController::class, 'register'])->name('register');
 Route::post("register", [AuthController::class, 'registerStore'])->name('registerStore');
+
+Route::middleware('auth')->group(function(){
+    Route::get('profil', [ProfilController::class, 'index'])->name('profil');
+    Route::put('profil', [ProfilController::class, 'store'])->name('profilStore');
+});
+

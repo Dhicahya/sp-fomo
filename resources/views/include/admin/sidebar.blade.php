@@ -2,7 +2,7 @@
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-            <a class="nav-link " href="index.html">
+            <a class="nav-link " href="{{ route('dashboard') }}">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
@@ -35,8 +35,18 @@
                     </a>
                 </li>
                 <li>
+                    <a href="#">
+                        <i class="bi bi-circle"></i><span>Analisis Kriteria</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('indikator.index') }}">
                         <i class="bi bi-circle"></i><span>Kelola Indikator</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="bi bi-circle"></i><span>Analisis Indikator</span>
                     </a>
                 </li>
             </ul>
