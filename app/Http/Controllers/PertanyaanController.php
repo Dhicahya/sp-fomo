@@ -22,13 +22,13 @@ class PertanyaanController extends Controller
     public function create(Request $request)
     {
         $kriteria = Kriteria::all();
-        $indikator = collect(); // Default: empty collection
+        $indikator = collect(); 
 
         $selectedKriteriaId = $request->input('kriteria_id');
 
         if ($selectedKriteriaId) {
             $indikator = Indikator::where('kriteria_id', $selectedKriteriaId)->get();
-        }// Query berdasarkan kriteria_id yang dipilih
+        }
         return view('pages.admin.pertanyaan.create', compact('kriteria', 'indikator', 'selectedKriteriaId'));
     }
 
@@ -46,11 +46,13 @@ class PertanyaanController extends Controller
         return redirect()->route('pertanyaan.index');
     }
 
-    public function edit(Pertanyaan $pertanyaan)
+    public function edit(Request $request, Pertanyaan $pertanyaan)
     {
         $kriteria = Kriteria::all();
-        $indikator = Indikator::all();
-        return view('pages.admin.pertanyaan.update', compact('pertanyaan', 'kriteria', 'indikator'));
+        $selectedKriteriaId = $request->input('kriteria_id', $pertanyaan->kriteria_id);
+        $indikator = Indikator::where('kriteria_id', $selectedKriteriaId)->get();
+
+        return view('pages.admin.pertanyaan.update', compact('pertanyaan', 'kriteria', 'indikator', 'selectedKriteriaId'));
     }
 
     public function update(Request $request, Pertanyaan $pertanyaan)
@@ -66,6 +68,7 @@ class PertanyaanController extends Controller
         $pertanyaan->update($data);
         return redirect()->route('pertanyaan.index');
     }
+
 
     public function destroy(Pertanyaan $pertanyaan)
     {
