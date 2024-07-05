@@ -1,4 +1,4 @@
-@extends('layouts.profil')
+@extends('layouts.app')
 
 @section('content')
     <div class="container mt-5">
@@ -6,7 +6,7 @@
             <div class="col-md-8 my-5">
                 <div class="card">
                     <div class="card-header text-white"
-                        style="background-image: radial-gradient(circle at 50% -20.71%, #2affff 0, #46adf9 50%, #2e4d6e 100%)">
+                        style="background-color: #5777ba;">
                         <h5 class="mb-0">PROFIL</h5>
                     </div>
                     <div class="card-body">
@@ -34,7 +34,7 @@
                                 <p class="text-muted mb-2">{{ '@' . $user->username }}</p>
                                 <p class="text-muted mb-2">{{ $user->email }}</p>
                                 <p class="text-muted mb-3">{{ $user->instansi }}</p>
-                                <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-primary-custom rounded-pill" data-bs-toggle="modal"
                                     data-bs-target="#editProfileModal">
                                     Edit Profil
                                 </button>

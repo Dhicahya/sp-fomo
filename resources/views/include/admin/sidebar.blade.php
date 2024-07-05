@@ -35,7 +35,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('relkriteria.index') }}">
                         <i class="bi bi-circle"></i><span>Analisis Kriteria</span>
                     </a>
                 </li>

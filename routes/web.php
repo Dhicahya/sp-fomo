@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IndikatorController;
+use App\Http\Controllers\RelIndikatorController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\RelKriteriaController;
 use App\Http\Controllers\SolusiController;
 use App\Http\Controllers\UserController;
 
@@ -30,6 +32,9 @@ Route::prefix('/admin/')->middleware(['auth', 'isAdmin'])->group(function(){
     Route::resource('pertanyaan', PertanyaanController::class);
     Route::get('pertanyaan/{pertanyaan}/delete', [PertanyaanController::class, 'destroy'])->name('pertanyaan.delete');
 
+    Route::resource('relkriteria', RelKriteriaController::class);
+
+
 });
 
 
@@ -42,5 +47,6 @@ Route::post("register", [AuthController::class, 'registerStore'])->name('registe
 Route::middleware('auth')->group(function(){
     Route::get('profil', [ProfilController::class, 'index'])->name('profil');
     Route::put('profil', [ProfilController::class, 'store'])->name('profilStore');
+
 });
 

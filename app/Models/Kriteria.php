@@ -12,7 +12,7 @@ class Kriteria extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     public function indikator() : HasMany {
         return $this->hasMany(Indikator::class);

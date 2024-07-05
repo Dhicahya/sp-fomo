@@ -34,19 +34,6 @@
                             @endif
                             @csrf
                             <div class="mb-3">
-                                <label for="nama" class="form-label">Nama</label>
-                                <input type="text" name="nama" class="form-control" id="nama" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="kode_indikator" class="form-label">Kode Indikator</label>
-                                <input type="text" name="kode_indikator" class="form-control" id="kode_indikator"
-                                    required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="nilai_pakar" class="form-label">Nilai Pakar</label>
-                                <input type="number" name="nilai_pakar" class="form-control" id="nilai_pakar">
-                            </div>
-                            <div class="mb-3">
                                 <label for="kriteria_id" class="form-label">Kriteria</label>
                                 <select name="kriteria_id" id="kriteria_id" class="form-select" required>
                                     <option value="" selected disabled>-- Pilih Kriteria --</option>
@@ -54,6 +41,15 @@
                                         <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="nama" class="form-label">Nama</label>
+                                <input type="text" name="nama" class="form-control" id="nama" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="kode_indikator" class="form-label">Kode Indikator</label>
+                                <input type="text" name="kode_indikator" class="form-control" id="kode_indikator"
+                                    required>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form><!-- End General Form Elements -->

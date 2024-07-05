@@ -60,8 +60,8 @@
             </div>
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="{{ route('logout') }}">Logout</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+                <a class="btn btn-danger" href="{{ route('logout') }}"><i class="bi bi-check-lg"></i></a>
             </div>
         </div>
     </div>
