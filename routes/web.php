@@ -33,6 +33,7 @@ Route::prefix('/admin/')->middleware(['auth', 'isAdmin'])->group(function(){
     Route::get('pertanyaan/{pertanyaan}/delete', [PertanyaanController::class, 'destroy'])->name('pertanyaan.delete');
 
     Route::resource('relkriteria', RelKriteriaController::class);
+    Route::resource('relindikator', RelIndikatorController::class);
 
 
 });

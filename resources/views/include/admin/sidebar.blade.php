@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('relindikator.index') }}">
                         <i class="bi bi-circle"></i><span>Analisis Indikator</span>
                     </a>
                 </li>

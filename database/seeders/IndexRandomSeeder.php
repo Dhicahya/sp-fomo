@@ -25,6 +25,8 @@ class IndexRandomSeeder extends Seeder
             ['jumlah' => 8, 'nilai' => 1.41],
             ['jumlah' => 9, 'nilai' => 1.45],
             ['jumlah' => 10, 'nilai' => 1.49],
+            ['jumlah' => 11, 'nilai' => 1.51],
+            ['jumlah' => 12, 'nilai' => 1.48],
         ];
 
         foreach ($data as $item) {

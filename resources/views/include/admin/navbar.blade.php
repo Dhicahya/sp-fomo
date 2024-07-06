@@ -33,7 +33,7 @@
                           </li>
 
                           <li>
-                              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                              <a class="dropdown-item d-flex align-items-center" href="{{ route('home') }}">
                                   <i class="bi bi-house"></i>
                                   <span>Home Page</span>
                               </a>

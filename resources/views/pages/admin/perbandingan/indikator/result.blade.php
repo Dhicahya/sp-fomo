@@ -3,11 +3,11 @@
 @section('content')
 
 <div class="pagetitle">
-    <h1>Data Kriteria</h1>
+    <h1>Data Indikator</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Kriteria</li>
+            <li class="breadcrumb-item active">Indikator</li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -27,16 +27,16 @@
                         <table class="table table-bordered">
                             <thead class="table-light">
                                 <tr>
-                                    <th>Kriteria</th>
-                                    @foreach ($kriterias as $kriteria)
-                                        <th>{{ $kriteria->nama }}</th>
+                                    <th>Indikator</th>
+                                    @foreach ($indikators as $indikator)
+                                        <th>{{ $indikator->kode_indikator }}</th>
                                     @endforeach
                                 </tr>
                             </thead>
                             <tbody>
                                 @for ($x = 0; $x < $n; $x++)
                                     <tr>
-                                        <td>{{ $kriterias[$x]->nama }}</td>
+                                        <td>{{ $indikators[$x]->kode_indikator }}</td>
                                         @for ($y = 0; $y < $n; $y++)
                                             <td>{{ number_format($matrik[$x][$y], 3) }}</td>
                                         @endfor
@@ -57,20 +57,20 @@
                 </div>
             </div><!-- End Matriks Perbandingan Berpasangan Card -->
 
-            <!-- Matriks Nilai Kriteria Card -->
+            <!-- Matriks Nilai Penyakit Card -->
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="card-title">Matriks Nilai Kriteria</h5>
+                        <h5 class="card-title">Matriks Nilai Penyakit</h5>
                     </div>
 
                     <div class="table-responsive text-nowrap">
                         <table class="table table-bordered">
                             <thead class="table-light">
                                 <tr>
-                                    <th>Kriteria</th>
-                                    @foreach ($kriterias as $kriteria)
-                                        <th>{{ $kriteria->nama }}</th>
+                                    <th>Indikator</th>
+                                    @foreach ($indikators as $indikator)
+                                        <th>{{ $indikator->kode_indikator }}</th>
                                     @endforeach
                                     <th>Jumlah</th>
                                     <th>Priority Vector</th>
@@ -79,7 +79,7 @@
                             <tbody>
                                 @for ($x = 0; $x < $n; $x++)
                                     <tr>
-                                        <td>{{ $kriterias[$x]->nama }}</td>
+                                        <td>{{ $indikators[$x]->kode_indikator }}</td>
                                         @for ($y = 0; $y < $n; $y++)
                                             <td>{{ number_format($matrikb[$x][$y], 3) }}</td>
                                         @endfor

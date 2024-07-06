@@ -1276,5 +1276,6 @@ section {
 
 .btn-primary-custom:hover {
     background-color: #5d7aae; /* warna hover yang lebih gelap */
+    color: #ffffff;
     border-color: #5d7aae; /* warna border hover */
 }

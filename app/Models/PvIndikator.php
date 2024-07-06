@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class PvIndikator extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['indikator_id', 'nilai'];
+
+    public function indikator(){
+        return $this->belongsTo(Indikator::class, 'indikator_id');
+    }
 }
+

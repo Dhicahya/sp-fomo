@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('pv_indikators', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('indikator_id');
+            $table->double('nilai');
             $table->timestamps();
+
+            $table->foreign('indikator_id')->references('id')->on('indikators')->onDelete('cascade');
         });
     }
 

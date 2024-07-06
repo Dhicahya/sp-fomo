@@ -14,11 +14,13 @@ return new class extends Migration
     {
         Schema::create('rel_indikators', function (Blueprint $table) {
             $table->id();
-            $table->string('kode1');
-            $table->string('kode2');
-            $table->double('bobot');
-            $table->foreignIdFor(Kriteria::class);
+            $table->unsignedBigInteger('indikator1');
+            $table->unsignedBigInteger('indikator2');
+            $table->double('nilai');
             $table->timestamps();
+
+            $table->foreign('indikator1')->references('id')->on('indikators')->onDelete('cascade');
+            $table->foreign('indikator2')->references('id')->on('indikators')->onDelete('cascade');
         });
     }
 
