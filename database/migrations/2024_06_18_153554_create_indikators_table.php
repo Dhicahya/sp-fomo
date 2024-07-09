@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\PvIndikator;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('kode_indikator');
-            $table->double('nilai_pakar')->nullable();
+            $table->foreignIdFor(PvIndikator::class)->nullable();
             $table->foreignIdFor(Kriteria::class);
             $table->timestamps();
         });

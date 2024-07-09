@@ -9,10 +9,12 @@ use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\RelKriteriaController;
 use App\Http\Controllers\SolusiController;
+use App\Http\Controllers\TesController;
 use App\Http\Controllers\UserController;
 
 
 Route::get('/', function () {return view('pages.home');})->name('home');
+
 
 Route::prefix('/admin/')->middleware(['auth', 'isAdmin'])->group(function(){
     Route::get('/', function(){return view('pages.admin.dashboard');})->name('dashboard');
@@ -49,5 +51,7 @@ Route::middleware('auth')->group(function(){
     Route::get('profil', [ProfilController::class, 'index'])->name('profil');
     Route::put('profil', [ProfilController::class, 'store'])->name('profilStore');
 
+    Route::get('/pilih-gejala', [TesController::class, 'showForm'])->name('pilih-gejala.form');
+    Route::post('/pilih-gejala', [TesController::class, 'submitForm'])->name('pilih-gejala.submit');
 });
 

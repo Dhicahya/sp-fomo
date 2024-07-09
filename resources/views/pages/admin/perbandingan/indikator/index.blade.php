@@ -53,7 +53,7 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" name="pilih{{ $urut }}" value="1" id="pilih{{ $urut }}1" checked>
                                                             <label class="form-check-label" for="pilih{{ $urut }}1">
-                                                                {{ $indikators[$x]->nama }}
+                                                                {{ $indikators[$x]->nama }} ({{ $indikators[$x]->kode_indikator }})
                                                             </label>
                                                         </div>
                                                     </td>
@@ -61,7 +61,7 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" name="pilih{{ $urut }}" value="2" id="pilih{{ $urut }}2">
                                                             <label class="form-check-label" for="pilih{{ $urut }}2">
-                                                                {{ $indikators[$y]->nama }}
+                                                                {{ $indikators[$y]->nama }} ({{ $indikators[$y]->kode_indikator }})
                                                             </label>
                                                         </div>
                                                     </td>

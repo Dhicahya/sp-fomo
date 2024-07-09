@@ -11,7 +11,7 @@
                     <div>
                         <h1>Sistem Pakar Identifikasi Tingkat FoMO</h1>
                         <h2>Cek tingkat kendali atas dirimu untuk mengetahui tingkat FoMO</h2>
-                        <a href="#" class="download-btn"><i class="bi bi-clipboard-check"></i></i> Lakukan Tes!</a>
+                        <a href="{{ route('pilih-gejala.form') }}" class="download-btn"><i class="bi bi-clipboard-check"></i></i> Lakukan Tes!</a>
                     </div>
                 </div>
                 <div class="col-lg-6 d-lg-flex flex-lg-column align-items-stretch order-1 order-lg-2 hero-img"

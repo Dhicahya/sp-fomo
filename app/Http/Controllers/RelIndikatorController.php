@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Indikator;
 use App\Models\IndexRandom;
 use App\Models\PvIndikator;
+use App\Models\PvKriteria;
+use App\Models\Kriteria;
 use App\Models\Rel_indikator;
 use Illuminate\Http\Request;
 

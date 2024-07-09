@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Indikator;
 use App\Models\Kriteria;
+use App\Models\PvIndikator;
 use Illuminate\Http\Request;
 
 class IndikatorController extends Controller
@@ -13,14 +14,15 @@ class IndikatorController extends Controller
      */
     public function index()
     {
-        $data = Indikator::all();
+        $data = Indikator::with('pvindikator', 'kriteria')->get();
         return view('pages.admin.indikator.index', compact('data'));
     }
 
     public function create()
     {
         $kriteria = Kriteria::all();
-        return view('pages.admin.indikator.create', compact('kriteria'));
+        $pvindikators = PvIndikator::all();
+        return view('pages.admin.indikator.create', compact('kriteria', 'pvindikators'));
     }
 
     public function store(Request $request)
@@ -28,22 +30,28 @@ class IndikatorController extends Controller
         $data = $request->validate([
             'nama' => 'required|string',
             'kode_indikator' => 'required|string',
-            'nilai_pakar' => 'nullable|numeric',
+            'pv_indikator_id' => 'nullable|exists:pv_indikators,id',
             'kriteria_id' => 'required|exists:kriterias,id',
         ]);
 
-        if (!isset($data['nilai_pakar'])) {
-            $data['nilai_pakar'] = 0.0;
+        $indikator = new Indikator();
+        $indikator->nama = $data['nama'];
+        $indikator->kode_indikator = $data['kode_indikator'];
+        $indikator->kriteria_id = $data['kriteria_id'];
+
+        if (isset($data['pv_indikator_id'])) {
+            $indikator->pv_indikator_id = $data['pv_indikator_id'];
         }
 
-        Indikator::create($data);
+        $indikator->save();
         return redirect()->route('indikator.index');
     }
 
     public function edit(Indikator $indikator)
     {
         $kriteria = Kriteria::all();
-        return view('pages.admin.indikator.update', compact('indikator', 'kriteria'));
+        $pvindikators = PvIndikator::all();
+        return view('pages.admin.indikator.update', compact('indikator', 'kriteria', 'pvindikators'));
     }
 
     public function update(Request $request, Indikator $indikator)
@@ -51,15 +59,19 @@ class IndikatorController extends Controller
         $data = $request->validate([
             'nama' => 'required|string',
             'kode_indikator' => 'required|string',
-            'nilai_pakar' => 'nullable|numeric',
+            'pv_indikator_id' => 'nullable|exists:pv_indikators,id',
             'kriteria_id' => 'required|exists:kriterias,id',
         ]);
 
-        if (!isset($data['nilai_pakar'])) {
-            $data['nilai_pakar'] = 0.0;
+        $indikator->nama = $data['nama'];
+        $indikator->kode_indikator = $data['kode_indikator'];
+        $indikator->kriteria_id = $data['kriteria_id'];
+
+        if (isset($data['pv_indikator_id'])) {
+            $indikator->pv_indikator_id = $data['pv_indikator_id'];
         }
 
-        $indikator->update($data);
+        $indikator->save();
         return redirect()->route('indikator.index');
     }
 

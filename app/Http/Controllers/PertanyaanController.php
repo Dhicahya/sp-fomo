@@ -9,12 +9,8 @@ use Illuminate\Http\Request;
 
 class PertanyaanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-
         $data = Pertanyaan::with('kriteria', 'indikator')->get();
         return view('pages.admin.pertanyaan.index', compact('data'));
     }
@@ -22,7 +18,7 @@ class PertanyaanController extends Controller
     public function create(Request $request)
     {
         $kriteria = Kriteria::all();
-        $indikator = collect(); 
+        $indikator = collect();
 
         $selectedKriteriaId = $request->input('kriteria_id');
 
@@ -37,7 +33,6 @@ class PertanyaanController extends Controller
         $data = $request->validate([
             'pertanyaan' => 'required|string',
             'kode_pertanyaan' => 'required|string',
-            'bobot' => 'nullable|exists:indikator,id',
             'kriteria_id' => 'required|exists:kriterias,id',
             'indikator_id' => 'required|exists:indikators,id',
         ]);
@@ -60,7 +55,6 @@ class PertanyaanController extends Controller
         $data = $request->validate([
             'pertanyaan' => 'required|string',
             'kode_pertanyaan' => 'required|string',
-            'bobot' => 'nullable|exists:indikator,id',
             'kriteria_id' => 'required|exists:kriterias,id',
             'indikator_id' => 'required|exists:indikators,id',
         ]);
@@ -68,7 +62,6 @@ class PertanyaanController extends Controller
         $pertanyaan->update($data);
         return redirect()->route('pertanyaan.index');
     }
-
 
     public function destroy(Pertanyaan $pertanyaan)
     {
