@@ -26,6 +26,8 @@ class KriteriaController extends Controller
             'nama' => 'required|string',
             'kode_kriteria' => 'required|string',
             'deskripsi' => 'required|string',
+            'pv_kriteria' => 'nullable|numeric',
+
         ]);
 
         Kriteria::create($data);
@@ -43,6 +45,7 @@ class KriteriaController extends Controller
             'nama' => 'required|string',
             'kode_kriteria' => 'required|string',
             'deskripsi' => 'required|string',
+            'pv_kriteria' => 'required|string',
         ]);
 
         $kriterium->update($data);

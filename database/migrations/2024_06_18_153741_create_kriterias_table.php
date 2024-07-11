@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('kode_kriteria');
             $table->text('deskripsi');
+            $table->double('pv_kriteria')->nullable();
             $table->timestamps();
         });
     }

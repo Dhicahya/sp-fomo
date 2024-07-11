@@ -13,11 +13,13 @@ use App\Http\Controllers\TesController;
 use App\Http\Controllers\UserController;
 
 
-Route::get('/', function () {return view('pages.home');})->name('home');
+Route::get('/', function () {
+    return view('pages.home'); })->name('home');
 
 
-Route::prefix('/admin/')->middleware(['auth', 'isAdmin'])->group(function(){
-    Route::get('/', function(){return view('pages.admin.dashboard');})->name('dashboard');
+Route::prefix('/admin/')->middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/', function () {
+        return view('pages.admin.dashboard'); })->name('dashboard');
 
     Route::resource('solusi', SolusiController::class);
     Route::get('solusi/{solusi}/delete', [SolusiController::class, 'destroy'])->name('solusi.delete');
@@ -35,7 +37,13 @@ Route::prefix('/admin/')->middleware(['auth', 'isAdmin'])->group(function(){
     Route::get('pertanyaan/{pertanyaan}/delete', [PertanyaanController::class, 'destroy'])->name('pertanyaan.delete');
 
     Route::resource('relkriteria', RelKriteriaController::class);
-    Route::resource('relindikator', RelIndikatorController::class);
+
+    Route::get('/relindikator', [RelIndikatorController::class, 'index'])->name('relindikator.index');
+    Route::post('/relindikator/store', [RelIndikatorController::class, 'store'])->name('relindikator.store');
+    Route::get('/pilih-kriteria', [RelIndikatorController::class, 'tampilkriteria'])->name('pilih-kriteria');
+
+
+
 
 
 });
@@ -47,7 +55,7 @@ Route::get("logout", [AuthController::class, 'logout'])->name('logout');
 Route::get("register", [AuthController::class, 'register'])->name('register');
 Route::post("register", [AuthController::class, 'registerStore'])->name('registerStore');
 
-Route::middleware('auth')->group(function(){
+Route::middleware('auth')->group(function () {
     Route::get('profil', [ProfilController::class, 'index'])->name('profil');
     Route::put('profil', [ProfilController::class, 'store'])->name('profilStore');
 

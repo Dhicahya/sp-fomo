@@ -3,11 +3,11 @@
 @section('content')
 
 <div class="pagetitle">
-    <h1>Data Indikator</h1>
+    <h1>Hasil Perhitungan Indikator</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-            <li class="breadcrumb-item active">Indikator</li>
+            <li class="breadcrumb-item active">Hasil Perhitungan</li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -61,7 +61,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="card-title">Matriks Nilai Penyakit</h5>
+                        <h5 class="card-title">Matriks Nilai Indikator</h5>
                     </div>
 
                     <div class="table-responsive text-nowrap">
@@ -114,7 +114,7 @@
                             <i class="bx bx-arrow-back"></i> Kembali
                         </a>
                     @else
-                        <a href="{{ route('relkriteria.index') }}" class="btn btn-primary mt-4" style="float: right;">
+                        <a href="{{ route('relindikator.index') }}" class="btn btn-primary mt-4" style="float: right;">
                             Lanjut <i class="bx bx-arrow-right"></i>
                         </a>
                     @endif

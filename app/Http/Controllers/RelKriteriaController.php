@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\IndexRandom;
 use App\Models\Kriteria;
-use App\Models\PvKriteria;
 use App\Models\Rel_kriteria;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -17,7 +16,7 @@ class RelKriteriaController extends Controller
     public function index()
     {
         $data = [
-            'title'     => 'Perbandingan Kriteria',
+            'title' => 'Perbandingan Kriteria',
             'kriterias' => Kriteria::get(),
         ];
         return view('pages.admin.perbandingan.kriteria.index', $data);
@@ -25,7 +24,7 @@ class RelKriteriaController extends Controller
 
     public function store(Request $request)
     {
-        $kriterias = Kriteria::all(); // Add this line to retrieve the list of Penyakit
+        $kriterias = Kriteria::all();
 
         $n = Kriteria::count();
         $matrik = array();
@@ -51,16 +50,16 @@ class RelKriteriaController extends Controller
             }
         }
 
-        // diagonal --> bernilai 1
+        // Diagonal --> bernilai 1
         for ($i = 0; $i <= ($n - 1); $i++) {
             $matrik[$i][$i] = 1;
         }
 
-        // inisialisasi jumlah tiap kolom dan baris penyakit
+        // Inisialisasi jumlah tiap kolom dan baris kriteria
         $jmlmpb = array_fill(0, $n, 0);
         $jmlmnk = array_fill(0, $n, 0);
 
-        // menghitung jumlah pada kolom penyakit tabel perbandingan berpasangan
+        // Menghitung jumlah pada kolom kriteria tabel perbandingan berpasangan
         for ($x = 0; $x <= ($n - 1); $x++) {
             for ($y = 0; $y <= ($n - 1); $y++) {
                 $value = $matrik[$x][$y];
@@ -68,7 +67,7 @@ class RelKriteriaController extends Controller
             }
         }
 
-        // menghitung jumlah pada baris penyakit tabel nilai penyakit
+        // Menghitung jumlah pada baris kriteria tabel nilai kriteria
         // matrikb merupakan matrik yang telah dinormalisasi
         for ($x = 0; $x <= ($n - 1); $x++) {
             for ($y = 0; $y <= ($n - 1); $y++) {
@@ -77,16 +76,14 @@ class RelKriteriaController extends Controller
                 $jmlmnk[$x] += $value;
             }
 
-            // nilai priority vektor
+            // Nilai priority vector
             $pv[$x] = $jmlmnk[$x] / $n;
 
-            PvKriteria::updateOrCreate(
-                ['kriteria_id' => $kriterias[$x]->id],  // Use the id of the penyakit
-                ['nilai' => $pv[$x]]
-            );
+            // Update pv_kriteria in Kriteria table
+            $kriterias[$x]->update(['pv_kriteria' => $pv[$x]]);
         }
 
-        // cek konsistensi
+        // Cek konsistensi
         $eigenvektor = $this->getEigenVector($jmlmpb, $jmlmnk, $n);
         $consIndex = $this->getConsIndex($jmlmpb, $jmlmnk, $n);
         $consRatio = $this->getConsRatio($jmlmpb, $jmlmnk, $n);
@@ -122,4 +119,3 @@ class RelKriteriaController extends Controller
         return $consratio;
     }
 }
-

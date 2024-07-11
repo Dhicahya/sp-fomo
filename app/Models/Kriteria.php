@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Indikator;
 use App\Models\Pertanyaan;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Kriteria extends Model
@@ -20,5 +21,9 @@ class Kriteria extends Model
 
     public function pertanyaan() : HasMany {
         return $this->hasMany(Pertanyaan::class);
+    }
+
+    public function relkriteria() : BelongsTo {
+        return $this->belongsTo(Rel_kriteria::class);
     }
 }

@@ -33,6 +33,7 @@
                         <th scope="col">Kriteria</th>
                         <th scope="col">Kode Kriteria</th>
                         <th scope="col">Deskripsi</th>
+                        <th scope="col">Nilai Kriteria</th>
                         <th scope="col">Aksi</th>
                     </tr>
                 </thead>
@@ -43,6 +44,7 @@
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->kode_kriteria }}</td>
                         <td>{{ $item->deskripsi }}</td>
+                        <td>{{ number_format($item->pv_kriteria, 4) }}</td>
                         <td>
                             <a class="btn btn-success" href="{{route('kriteria.edit', $item)}}">
                                 <i class="bi bi-pencil-square"></i>

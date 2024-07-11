@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Kriteria;
 use App\Models\Pertanyaan;
-use App\Models\PvIndikator;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Indikator extends Model
@@ -17,21 +16,29 @@ class Indikator extends Model
     protected $fillable = [
         'nama',
         'kode_indikator',
-        'pv_indikator_id',
-        'kriteria_id',
         'nilai_pakar',
+        'pv_indikator',
+        'pv_kriteria',
+        'kriteria_id',
     ];
 
-    public function kriteria() : BelongsTo {
-        return $this->belongsTo(Kriteria::class);
-    }
+    // public function pvindikator()
+    // {
+    //     return $this->belongsTo(PvIndikator::class, 'pv_indikator_id');
+    // }
 
-    public function pertanyaan() : HasMany{
+    // public function pvkriteria()
+    // {
+    //     return $this->belongsTo(PvKriteria::class, 'pv_kriteria_id');
+    // }
+
+    public function kriteria()
+    {
+        return $this->belongsTo(Kriteria::class, 'kriteria_id');
+    }
+    
+    public function pertanyaan(): HasMany
+    {
         return $this->hasMany(Pertanyaan::class);
     }
-
-    public function pvindikator(){
-        return $this->belongsTo(PvIndikator::class, 'pv_indikator_id');
-    }
-
 }

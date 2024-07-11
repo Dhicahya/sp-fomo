@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Indikator;
 use App\Models\IndexRandom;
-use App\Models\PvIndikator;
-use App\Models\PvKriteria;
 use App\Models\Kriteria;
 use App\Models\Rel_indikator;
 use Illuminate\Http\Request;
@@ -15,20 +13,25 @@ class RelIndikatorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = [
-            'title' => 'Perbandingan Indikator',
-            'indikators' => Indikator::get(),
-        ];
-        return view('pages.admin.perbandingan.indikator.index', $data);
+        $kriteria = Kriteria::all();
+        $selectedKriteriaId = $request->input('kriteria_id');
+        $indikators = collect();
+
+        if ($selectedKriteriaId) {
+            $indikators = Indikator::where('kriteria_id', $selectedKriteriaId)->get();
+        }
+
+        return view('pages.admin.perbandingan.indikator.index', compact('kriteria', 'indikators', 'selectedKriteriaId'));
     }
 
     public function store(Request $request)
     {
-        $indikators = Indikator::all(); // Add this line to retrieve the list of Penyakit
+        $selectedKriteriaId = $request->input('kriteria_id');
+        $indikators = Indikator::where('kriteria_id', $selectedKriteriaId)->get();
 
-        $n = Indikator::count();
+        $n = $indikators->count();
         $matrik = array();
         $urut = 0;
 
@@ -37,12 +40,19 @@ class RelIndikatorController extends Controller
                 $urut++;
                 $pilih = "pilih" . $urut;
                 $bobot = "bobot" . $urut;
+
+                $bobotValue = $request[$bobot] ?? 1; // Set default value to 1 if not set
+
+                if ($bobotValue == 0) {
+                    $bobotValue = 1; // Prevent division by zero by setting a default value
+                }
+
                 if ($request[$pilih] == 1) {
-                    $matrik[$x][$y] = $request[$bobot];
-                    $matrik[$y][$x] = 1 / $request[$bobot];
+                    $matrik[$x][$y] = $bobotValue;
+                    $matrik[$y][$x] = 1 / $bobotValue;
                 } else {
-                    $matrik[$x][$y] = 1 / $request[$bobot];
-                    $matrik[$y][$x] = $request[$bobot];
+                    $matrik[$x][$y] = 1 / $bobotValue;
+                    $matrik[$y][$x] = $bobotValue;
                 }
 
                 Rel_indikator::updateOrCreate(
@@ -81,10 +91,15 @@ class RelIndikatorController extends Controller
             // nilai priority vektor
             $pv[$x] = $jmlmnk[$x] / $n;
 
-            PvIndikator::updateOrCreate(
-                ['indikator_id' => $indikators[$x]->id],  // Use the id of the penyakit
-                ['nilai' => $pv[$x]]
-            );
+            $indikators[$x]->update(['pv_indikator' => $pv[$x]]);
+        }
+
+        foreach ($indikators as $indikator) {
+            $kriteria = $indikator->kriteria;
+            if ($kriteria && $kriteria->pv_kriteria) {
+                $indikator->nilai_pakar = $indikator->pv_indikator * $kriteria->pv_kriteria;
+                $indikator->save();
+            }
         }
 
         // cek konsistensi
@@ -118,6 +133,12 @@ class RelIndikatorController extends Controller
         $consindex = $this->getConsIndex($matrik_a, $matrik_b, $n);
         $ir = IndexRandom::where('jumlah', $n)->first();
         $nilaiIR = $ir ? $ir->nilai : 0;
+
+        // Prevent division by zero
+        if ($nilaiIR == 0) {
+            return 0; // or handle the situation appropriately
+        }
+
         $consratio = $consindex / $nilaiIR;
 
         return $consratio;
