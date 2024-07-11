@@ -36,7 +36,6 @@ class UserController extends Controller
             'password' => 'required|string',
             'image_path' => 'nullable|file',
             'role' => 'required|in:admin,user',
-            'instansi' => 'required|string'          
         ]);
 
         if (@$data['image_path']) {
@@ -78,7 +77,6 @@ class UserController extends Controller
             'password' => 'nullable|string',
             'image_path' => 'nullable|file',
             'role' => 'required|in:admin,user',
-            'instansi' => 'required|string'  
         ]);
 
         if ($data['password'] == ''){

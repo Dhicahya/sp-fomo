@@ -23,3 +23,32 @@
           }
       }
   </script>
+
+    {{-- Toggle Password Hide/Unhide --}}
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const togglePassword = document.querySelector('#togglePassword');
+          const password = document.querySelector('#password');
+
+          togglePassword.addEventListener('click', function(e) {
+              // toggle the type attribute
+              const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+              password.setAttribute('type', type);
+              // toggle the eye / eye-slash icon
+              this.querySelector('i').classList.toggle('bi-eye-slash');
+              this.querySelector('i').classList.toggle('bi-eye');
+          });
+
+          const togglePasswordConfirm = document.querySelector('#togglePasswordConfirm');
+          const passwordConfirm = document.querySelector('#password-confirm');
+
+          togglePasswordConfirm.addEventListener('click', function(e) {
+              // toggle the type attribute
+              const type = passwordConfirm.getAttribute('type') === 'password' ? 'text' : 'password';
+              passwordConfirm.setAttribute('type', type);
+              // toggle the eye / eye-slash icon
+              this.querySelector('i').classList.toggle('bi-eye');
+              this.querySelector('i').classList.toggle('bi-eye-slash');
+          });
+      });
+  </script>

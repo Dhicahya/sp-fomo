@@ -18,7 +18,6 @@ class AdminSeeder extends Seeder
             'name' => 'admin',
             'role' => 'admin',
             'password' => 'admin123',
-            'instansi'=> 'Universitas Muhammadiyah Cirebon'
         ]);
     }
 }

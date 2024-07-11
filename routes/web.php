@@ -14,12 +14,14 @@ use App\Http\Controllers\UserController;
 
 
 Route::get('/', function () {
-    return view('pages.home'); })->name('home');
+    return view('pages.home');
+})->name('home');
 
 
-Route::prefix('/admin/')->middleware(['auth', 'isAdmin'])->group(function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/', function () {
-        return view('pages.admin.dashboard'); })->name('dashboard');
+        return view('pages.admin.dashboard');
+    })->name('dashboard');
 
     Route::resource('solusi', SolusiController::class);
     Route::get('solusi/{solusi}/delete', [SolusiController::class, 'destroy'])->name('solusi.delete');
@@ -49,13 +51,13 @@ Route::prefix('/admin/')->middleware(['auth', 'isAdmin'])->group(function () {
 });
 
 
-Route::get('login', [AuthController::class, 'login'])->name('login');
-Route::post("login", [AuthController::class, 'loginStore'])->name('loginStore');
-Route::get("logout", [AuthController::class, 'logout'])->name('logout');
-Route::get("register", [AuthController::class, 'register'])->name('register');
-Route::post("register", [AuthController::class, 'registerStore'])->name('registerStore');
+// Route::get('login', [AuthController::class, 'login'])->name('login');
+// Route::post("login", [AuthController::class, 'loginStore'])->name('loginStore');
+// Route::get("logout", [AuthController::class, 'logout'])->name('logout');
+// Route::get("register", [AuthController::class, 'register'])->name('register');
+// Route::post("register", [AuthController::class, 'registerStore'])->name('registerStore');
 
-Route::middleware('auth')->group(function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('profil', [ProfilController::class, 'index'])->name('profil');
     Route::put('profil', [ProfilController::class, 'store'])->name('profilStore');
 
@@ -63,3 +65,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/pilih-gejala', [TesController::class, 'submitForm'])->name('pilih-gejala.submit');
 });
 
+
+Auth::routes(['verify' => true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -19,7 +19,7 @@ class AdminMiddleware
         if (Auth::check() && Auth::user()->role == 'admin') {
             return $next($request);
         } else {
-            return redirect()->route('home');
+            return to_route('fallback.route', '404');
         }
     }
 }

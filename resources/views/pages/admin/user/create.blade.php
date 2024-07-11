@@ -37,12 +37,13 @@
                                 <input type="email" name="email" class="form-control" id="email" required>
                             </div>
                             <div class="mb-3">
-                                <label for="instansi" class="form-label">Instansi</label>
-                                <input type="text" name="instansi" class="form-control" id="instansi" required>
-                            </div>
-                            <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" name="password" class="form-control" id="password" required>
+                                <div class="input-group">
+                                    <input type="password" name="password" class="form-control" id="password" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Role</label>

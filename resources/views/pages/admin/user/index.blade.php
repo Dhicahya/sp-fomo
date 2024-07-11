@@ -33,7 +33,6 @@
                         <th scope="col">Nama</th>
                         <th scope="col">Username</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Instansi</th>
                         <th scope="col">Role</th>
                         <th scope="col">Aksi</th>
                     </tr>
@@ -52,7 +51,6 @@
                         <td>{{$item->name}}</td>
                         <td>{{ $item->username }}</td>
                         <td>{{ $item->email }}</td>
-                        <td>{{ $item->instansi }}</td>
                         <td>{{ $item->role }}</td>
                         <td>
                             <a class="btn btn-success" href="{{route('user.edit', $item)}}">

@@ -50,14 +50,13 @@
                                     value="{{ $user->username }}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="text" name="email" class="form-control" id="email"
-                                    value="{{ $user->email }}" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="instansi" class="form-label">Instansi</label>
-                                <input type="text" name="instansi" class="form-control" id="instansi"
-                                    value="{{ $user->instansi }}" required>
+                                <label for="password" class="form-label">Password (isi jika ingin ganti password)</label>
+                                <div class="input-group">
+                                    <input type="password" name="password" class="form-control" id="password">
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Role</label>
