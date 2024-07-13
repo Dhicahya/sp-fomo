@@ -65,10 +65,9 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
                         class="bi bi-x-lg"></i></button>
-                <a class="btn btn-sm btn-danger d-flex" href="{{ route('logout') }}"
+                <a class="btn btn-danger d-flex" href="{{ route('logout') }}"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <small class="align-middle">Logout</small>
-                    <i class="ti ti-logout ms-2 ti-14px"></i>
+                      <i class="bi bi-check-lg"></i>
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf

@@ -36,7 +36,6 @@ class ProfilController extends Controller
             'name' => 'required|string',
             'username' => 'required|string',
             'email' => 'required|string',
-            'instansi' => 'required|string',
             'password' => 'nullable|string|confirmed',
             'image_path' => "nullable|image"
         ]);

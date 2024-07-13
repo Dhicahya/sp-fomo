@@ -33,7 +33,6 @@
                                 <h4 class="mb-2">{{ $user->name }}</h4>
                                 <p class="text-muted mb-2">{{ '@' . $user->username }}</p>
                                 <p class="text-muted mb-2">{{ $user->email }}</p>
-                                <p class="text-muted mb-3">{{ $user->instansi }}</p>
                                 <button type="button" class="btn btn-primary-custom rounded-pill" data-bs-toggle="modal"
                                     data-bs-target="#editProfileModal">
                                     Edit Profil
@@ -83,11 +82,6 @@
                             <label for="inputEmail">Email</label>
                             <input type="email" class="form-control" id="email" name="email"
                                 value="{{ $user->email }}" required>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="inputInstansi">Instansi</label>
-                            <input type="text" class="form-control" id="instansi" name="instansi"
-                                value="{{ $user->instansi }}" required>
                         </div>
                         <div class="form-group mb-3">
                             <label for="inputPassword">Password</label>

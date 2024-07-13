@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\IdentifikasiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IndikatorController;
@@ -13,10 +14,9 @@ use App\Http\Controllers\TesController;
 use App\Http\Controllers\UserController;
 
 
-Route::get('/', function () {
-    return view('pages.home');
-})->name('home');
 
+
+Auth::routes(['verify' => true]);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('/', function () {
@@ -43,11 +43,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::get('/relindikator', [RelIndikatorController::class, 'index'])->name('relindikator.index');
     Route::post('/relindikator/store', [RelIndikatorController::class, 'store'])->name('relindikator.store');
     Route::get('/pilih-kriteria', [RelIndikatorController::class, 'tampilkriteria'])->name('pilih-kriteria');
-
-
-
-
-
 });
 
 
@@ -56,16 +51,23 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
 // Route::get("logout", [AuthController::class, 'logout'])->name('logout');
 // Route::get("register", [AuthController::class, 'register'])->name('register');
 // Route::post("register", [AuthController::class, 'registerStore'])->name('registerStore');
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+Auth::routes();
+
+Route::get('profil', [ProfilController::class, 'index'])->name('profil');
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('profil', [ProfilController::class, 'index'])->name('profil');
+
     Route::put('profil', [ProfilController::class, 'store'])->name('profilStore');
 
-    Route::get('/pilih-gejala', [TesController::class, 'showForm'])->name('pilih-gejala.form');
-    Route::post('/pilih-gejala', [TesController::class, 'submitForm'])->name('pilih-gejala.submit');
+    // Route::get('/pilih-gejala', [TesController::class, 'showForm'])->name('pilih-gejala.form');
+    // Route::post('/pilih-gejala', [TesController::class, 'submitForm'])->name('pilih-gejala.submit');
+
+    Route::get('/identifikasi', [IdentifikasiController::class, 'index'])->name('form-identitas');
+    Route::post('/identifikasi/create-pasien', [IdentifikasiController::class, 'createPasien'])->name('isi-identitas');
+    Route::get('/identifikasi/pilih-gejala', [IdentifikasiController::class, 'pilihGejala'])->name('pilih-gejala');
 });
-
-
-Auth::routes(['verify' => true]);
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
