@@ -25,7 +25,8 @@
               </div>
               
               <!-- Table with stripped rows -->
-              <table class="table datatable">
+              <div class="table-responsive">
+                              <table class="table datatable">
                 <thead>
                     <tr>
                         <th scope="col">No</th>
@@ -65,6 +66,8 @@
                 </tbody>
               </table>
               <!-- End Table with stripped rows -->
+              </div>
+
 
             </div>
           </div>

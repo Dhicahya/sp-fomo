@@ -21,4 +21,9 @@ class Pertanyaan extends Model
     public function indikator() : BelongsTo{
         return $this->belongsTo(Indikator::class);   
     }
+
+    public function solusi(): BelongsTo
+    {
+        return $this->belongsTo(Solusi::class);
+    }
 }

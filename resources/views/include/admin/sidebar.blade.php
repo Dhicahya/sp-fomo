@@ -49,6 +49,11 @@
                         <i class="bi bi-circle"></i><span>Analisis Indikator</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('indexRandom.index') }}">
+                        <i class="bi bi-circle"></i><span>Index Random</span>
+                    </a>
+                </li>
             </ul>
         </li><!-- End Basis Data Nav -->
 

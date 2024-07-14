@@ -14,133 +14,96 @@
     <section class="section dashboard">
         <div class="row">
 
+            <!-- Sales Card -->
+            <div class="col-xxl-4 col-md-6">
+                <div class="card info-card sales-card">
+                    <a href="{{ route('user.index') }}">
 
-                    <!-- Sales Card -->
-                    <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card sales-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Users</h5>
 
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i
-                                        class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-people"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>{{ App\Models\User::count() }}</h6>
+                                </div>
                             </div>
+                        </div>
 
-                            <div class="card-body">
-                                <h5 class="card-title">Users</h5>
+                    </a>
+                </div>
+            </div><!-- End Sales Card -->
 
-                                <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-people"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6>{{ App\Models\User::count() }}</h6>
-                                    </div>
+            <!-- Revenue Card -->
+            <div class="col-xxl-4 col-md-6">
+                <div class="card info-card revenue-card">
+
+                    <a href="{{ route('kriteria.index') }}">
+
+                        <div class="card-body">
+                            <h5 class="card-title">Kriteria</h5>
+
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-list-task"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>{{ App\Models\kriteria::count() }}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div><!-- End Revenue Card -->
+
+            <!-- Customers Card -->
+            <div class="col-xxl-4 col-xl-12">
+
+                <div class="card info-card customers-card">
+                    <a href="{{ route('indikator.index') }}">
+                        <div class="card-body">
+                            <h5 class="card-title">Indikator</h5>
+
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-list-check"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>{{ App\Models\Indikator::count() }}</h6>
                                 </div>
                             </div>
 
                         </div>
-                    </div><!-- End Sales Card -->
+                    </a>
+                </div>
 
-                    <!-- Revenue Card -->
-                    <div class="col-xxl-4 col-md-6">
-                        <div class="card info-card revenue-card">
+            </div><!-- End Customers Card -->
 
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i
-                                        class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
+            <!-- Revenue Card -->
+            <div class="col-xxl-4 col-md-6">
+                <div class="card info-card revenue-card">
 
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div>
+                    <a href="{{ route('pertanyaan.index') }}">
 
-                            <div class="card-body">
-                                <h5 class="card-title">Kriteria</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">Pertanyaan</h5>
 
-                                <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-list-task"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6>{{ App\Models\kriteria::count() }}</h6>
-                                    </div>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-question-circle"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>{{ App\Models\Pertanyaan::count() }}</h6>
                                 </div>
                             </div>
-
                         </div>
-                    </div><!-- End Revenue Card -->
+                    </a>
 
-                    <!-- Customers Card -->
-                    <div class="col-xxl-4 col-xl-12">
-
-                        <div class="card info-card customers-card">
-                          <a href="{{ route('indikator.index') }}">
-                            <div class="card-body">
-                                <h5 class="card-title">Indikator</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-list-check"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6>{{ App\Models\Indikator::count() }}</h6>
-                                    </div>
-                                </div>
-
-                            </div>
-                          </a>
-                        </div>
-
-                    </div><!-- End Customers Card -->
-
-                    <!-- Customers Card -->
-                    <div class="col-xxl-4 col-xl-12">
-
-                        <div class="card info-card customers-card">
-
-                            <div class="filter">
-                                <a class="icon" href="#" data-bs-toggle="dropdown"><i
-                                        class="bi bi-three-dots"></i></a>
-                                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                                    <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
-                                    </li>
-
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="card-body">
-                                <h5 class="card-title">Pertanyaan</h5>
-
-                                <div class="d-flex align-items-center">
-                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-question-circle"></i>
-                                    </div>
-                                    <div class="ps-3">
-                                        <h6>{{ App\Models\Pertanyaan::count() }}</h6>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div><!-- End Customers Card -->
+                </div>
+            </div><!-- End Revenue Card -->
 
         </div>
     </section>

@@ -21,4 +21,9 @@ class Identifikasi extends Model
     public function Solusi(){
         return $this->belongsTo(Solusi::class);
     }
+
+    public function pertanyaan()
+    {
+        return $this->belongsTo(Pertanyaan::class);
+    }
 }

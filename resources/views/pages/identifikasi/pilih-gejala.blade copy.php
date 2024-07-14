@@ -13,7 +13,7 @@
 
                 <div class="row justify-content-center">
                     <div class="col-lg-12">
-                        <form action="{{ route('proses-identifikasi') }}" method="post" role="form" data-aos="fade-up">
+                        <form action="#" method="post" role="form" data-aos="fade-up">
                             @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -26,53 +26,48 @@
                             @csrf
                             <input type="hidden" name="pasien_id" value="{{ $pasien->id }}">
                             <div class="row">
-                                {{-- @foreach ($pertanyaans as $pertanyaan) --}}
-                                {{-- <h3>
-                                </h3> --}}
                                 @foreach ($pertanyaans as $pertanyaan)
-                                <div class="col-md-6 mb-4">
-                                    <p>{{ $pertanyaan->kriteria->nama }}</p>
-                                    <div class="card">
-                                        <div class="card-header">
+                                    <div class="col-md-6 mb-4">
+                                        <div class="card">
+                                            <div class="card-header">
                                                 <strong>{{ $loop->iteration }}. {{ $pertanyaan->pertanyaan }}</strong>
                                             </div>
                                             <div class="card-body">
-                                                <div class="form-check mb-2">
+                                                <div class="form-check">
                                                     <input class="form-check-input" type="radio"
-                                                        name="pertanyaans[{{ $pertanyaan->id }}]" value="0.16" id="0.16{{ $pertanyaan->id }}" required>
-                                                    <label class="form-check-label" for="0.16{{ $pertanyaan->id }}">Saya tidak bisa melakukannya walaupun dengan dukungan</label>
-                                                </div>
-                                                <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="pertanyaans[{{ $pertanyaan->id }}]" value="0.33" id="0.33{{ $pertanyaan->id }}" required>
-                                                    <label class="form-check-label" for="0.33{{ $pertanyaan->id }}">Saya tidak bisa melakukannya karena tidak ada kesempatan.</label>
-                                                </div>
-                                                <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="pertanyaans[{{ $pertanyaan->id }}]" value="0.5" id="0.5{{ $pertanyaan->id }}" required>
-                                                    <label class="form-check-label" for="0.5{{ $pertanyaan->id }}">Saya tidak bisa melakukannya sendiri.</label>
-                                                </div>
-                                                <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="pertanyaans[{{ $pertanyaan->id }}]" value="0.67" id="0.67{{ $pertanyaan->id }}" required>
-                                                    <label class="form-check-label" for="0.67{{ $pertanyaan->id }}">Saya melakukannya dengan dukungan.</label>
-                                                </div>
-                                                <div class="form-check mb-2">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="pertanyaans[{{ $pertanyaan->id }}]" value="0.83" id="0.83{{ $pertanyaan->id }}" required>
-                                                    <label class="form-check-label" for="0.83{{ $pertanyaan->id }}">Saya melakukannya jika mereka memberi saya kesempatan.</label>
+                                                        name="pertanyaans[{{ $pertanyaan->id }}]" value="0.16" required>
+                                                        name="pertanyaans[{{ $pertanyaan->id }}]" value="0.16" required>
+                                                    <label class="form-check-label">Tidak</label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio"
-                                                        name="pertanyaans[{{ $pertanyaan->id }}]" value="1.0" id="1.0{{ $pertanyaan->id }}" required>
-                                                    <label class="form-check-label" for="1.0{{ $pertanyaan->id }}">Saya bisa melakukannya sendiri.</label>
+                                                        name="pertanyaans[{{ $pertanyaan->id }}]" value="0.33" required>
+                                                    <label class="form-check-label">Tidak Yakin</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="pertanyaans[{{ $pertanyaan->id }}]" value="0.5" required>
+                                                    <label class="form-check-label">Sedikit Yakin</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="pertanyaans[{{ $pertanyaan->id }}]" value="0.67" required>
+                                                    <label class="form-check-label">Cukup Yakin</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="pertanyaans[{{ $pertanyaan->id }}]" value="0.8" required>
+                                                    <label class="form-check-label">Yakin</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="pertanyaans[{{ $pertanyaan->id }}]" value="1.0" required>
+                                                    <label class="form-check-label">Sangat Yakin</label>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 @endforeach
-                                {{-- @endforeach --}}
-
                             </div>
                             <div class="text-center mb-3">
                                 <button type="submit" class="btn btn-primary btn-block">

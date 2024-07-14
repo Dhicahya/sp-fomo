@@ -22,16 +22,6 @@ class Indikator extends Model
         'kriteria_id',
     ];
 
-    // public function pvindikator()
-    // {
-    //     return $this->belongsTo(PvIndikator::class, 'pv_indikator_id');
-    // }
-
-    // public function pvkriteria()
-    // {
-    //     return $this->belongsTo(PvKriteria::class, 'pv_kriteria_id');
-    // }
-
     public function kriteria()
     {
         return $this->belongsTo(Kriteria::class, 'kriteria_id');

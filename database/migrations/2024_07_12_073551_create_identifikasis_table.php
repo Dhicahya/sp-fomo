@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('kriteria_id')->nullable()->constrained('kriterias');
             $table->foreignId('pertanyaan_id')->nullable()->constrained('pertanyaans');
             $table->foreignId('solusis')->nullable()->constrained('solusis');
-            $table->double('nilai_user', 8,3);
-            $table->double('nilai_hasil', 8,3);
+            $table->double('nilai_user', 8,3)->nullable();
+            $table->double('nilai_hasil', 8,3)->nullable();
             $table->timestamps();
         });
     }

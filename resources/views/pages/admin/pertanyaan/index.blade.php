@@ -43,7 +43,7 @@
                         <th scope="row">{{$index+1}}</th>
                         <td>{{ $item->pertanyaan }}</td>
                         <td>{{ $item->kode_pertanyaan }}</td>
-                        <td>{{ $item->indikator->nilai_pakar }}</td>
+                        <td>{{ number_format($item->indikator->nilai_pakar, 4) }}</td>
                         <td>{{ $item->kriteria->kode_kriteria }}</td>
                         <td>{{ $item->indikator->kode_indikator }}</td>
                         <td>

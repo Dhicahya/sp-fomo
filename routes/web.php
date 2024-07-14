@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IdentifikasiController;
+use App\Http\Controllers\IndexRandomController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IndikatorController;
@@ -38,6 +39,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::resource('pertanyaan', PertanyaanController::class);
     Route::get('pertanyaan/{pertanyaan}/delete', [PertanyaanController::class, 'destroy'])->name('pertanyaan.delete');
 
+    Route::resource('indexRandom', IndexRandomController::class);
+    Route::get('random-index/{indexRandom}/delete', [IndexRandomController::class, 'destroy'])->name('indexRandom.delete');
+
+
     Route::resource('relkriteria', RelKriteriaController::class);
 
     Route::get('/relindikator', [RelIndikatorController::class, 'index'])->name('relindikator.index');
@@ -60,7 +65,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('profil', [ProfilController::class, 'index'])->name('profil');
-Route::group(['middleware' => ['auth', 'verified']], function () {
+Route::group(['middleware' => ['auth']], function () {
 
     Route::put('profil', [ProfilController::class, 'store'])->name('profilStore');
 
@@ -70,4 +75,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/identifikasi', [IdentifikasiController::class, 'index'])->name('form-identitas');
     Route::post('/identifikasi/create-pasien', [IdentifikasiController::class, 'createPasien'])->name('isi-identitas');
     Route::get('/identifikasi/pilih-gejala', [IdentifikasiController::class, 'pilihGejala'])->name('pilih-gejala');
+    Route::post('/identifikasi/proses-identifikasi', [IdentifikasiController::class, 'prosesIdentifikasi'])->name('proses-identifikasi');
+    Route::get('/identifikasi/hasil-diagnosa/{pasien_id}', [IdentifikasiController::class, 'hasilDiagnosa'])->name('hasil-diagnosa');
 });

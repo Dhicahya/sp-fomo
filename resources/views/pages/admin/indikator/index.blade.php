@@ -26,40 +26,42 @@
                         </div>
 
                         <!-- Table with stripped rows -->
-                        <table class="table datatable">
-                            <thead>
-                                <tr>
-                                    <th scope="col">No</th>
-                                    <th scope="col">Indikator</th>
-                                    <th scope="col">Kode Indikator</th>
-                                    <th scope="col">Kriteria</th>
-                                    <th scope="col">Nilai Indikator</th>
-                                    <th scope="col">Nilai Pakar</th>
-                                    <th scope="col">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($data as $index => $item)
+                        <div class="table-responsive">
+                            <table class="table datatable">
+                                <thead>
                                     <tr>
-                                        <th scope="row">{{ $index + 1 }}</th>
-                                        <td>{{ $item->nama }}</td>
-                                        <td>{{ $item->kode_indikator }}</td>
-                                        <td>{{ $item->kriteria->nama }} ({{ $item->kriteria->kode_kriteria }})</td>
-                                        <td>{{ number_format($item->pv_indikator, 4) }}</td>
-                                        <td>{{ number_format($item->nilai_pakar, 4) }}</td>
-                                        <td>
-                                            <a class="btn btn-success" href="{{ route('indikator.edit', $item) }}">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </a>
-                                            <a class="btn btn-danger"
-                                                onclick="deleteData('{{ route('indikator.delete', $item) }}')">
-                                                <i class="bi bi-trash3"></i>
-                                            </a>
-                                        </td>
+                                        <th scope="col">No</th>
+                                        <th scope="col">Indikator</th>
+                                        <th scope="col">Kode Indikator</th>
+                                        <th scope="col">Kriteria</th>
+                                        <th scope="col">Nilai Indikator</th>
+                                        <th scope="col">Nilai Pakar</th>
+                                        <th scope="col">Aksi</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($data as $index => $item)
+                                        <tr>
+                                            <th scope="row">{{ $index + 1 }}</th>
+                                            <td>{{ $item->nama }}</td>
+                                            <td>{{ $item->kode_indikator }}</td>
+                                            <td>{{ $item->kriteria->nama }} ({{ $item->kriteria->kode_kriteria }})</td>
+                                            <td>{{ number_format($item->pv_indikator, 4) }}</td>
+                                            <td>{{ number_format($item->nilai_pakar, 4) }}</td>
+                                            <td>
+                                                <a class="btn btn-success" href="{{ route('indikator.edit', $item) }}">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                </a>
+                                                <a class="btn btn-danger"
+                                                    onclick="deleteData('{{ route('indikator.delete', $item) }}')">
+                                                    <i class="bi bi-trash3"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                         <!-- End Table with stripped rows -->
 
                     </div>
