@@ -14,8 +14,17 @@
                 <div class="section">
                     <div class="row justify-content-center">
                         <div class="col-lg-10">
-                            <div class="card mb-4 mt-3">
-                                <h3 class="card-header text-center">Nilai Akhir Kriteria</h3>
+                            <div class="card mb-4 mt-3 shadow-sm">
+                                <h3 class="card-header text-center bg-primary text-white">Biodata Pasien</h3>
+                                <div class="card-body">
+                                    <p><strong>Nama:</strong> {{ $pasien->nama_pasien }}</p>
+                                    <p><strong>Umur:</strong> {{ $pasien->umur }}</p>
+                                    <p><strong>Instansi:</strong> {{ $pasien->instansi }}</p>
+                                </div>
+                            </div>
+
+                            <div class="card mb-4 mt-3 shadow-sm">
+                                <h3 class="card-header text-center bg-primary text-white">Nilai Akhir Kriteria</h3>
                                 <div class="card-body">
                                     @php
                                         $max_nilai = 0;
@@ -24,7 +33,7 @@
 
                                     @foreach ($nilai_akhir_kriteria as $kriteria => $nilai_akhir)
                                         <div class="mb-3">
-                                            <h5>{{ $kriteria }}</h5>
+                                            <h5 class="text-primary">{{ $kriteria }}</h5>
                                             <p>Nilai Akhir: <strong>{{ $nilai_akhir }}</strong></p>
                                         </div>
 
@@ -42,6 +51,16 @@
                                     <div class="alert alert-light">
                                         <strong>Deskripsi:</strong> {{ $deskripsi_kriteria[$max_kriteria] ?? 'Deskripsi tidak tersedia' }}
                                     </div>
+                                    <div class="alert alert-warning text-center mt-4">
+                                        <strong>Presentase Nilai User:</strong> {{ number_format($presentase, 2) }}%
+                                    </div>
+                                    <div class="alert alert-success text-left mt-4">
+                                        <strong>Kategori Hasil:</strong> {{ $kategori }}
+                                    </div>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <a href="{{ route('home') }}" class="btn btn-secondary me-2">Kembali</a>
+                                    <button onclick="window.print();" class="btn btn-success">Cetak Hasil</button>
                                 </div>
                             </div>
                         </div>

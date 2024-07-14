@@ -30,12 +30,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="solusi" class="form-label">Solusi</label>
-                                <input type="text" name="solusi" class="form-control" id="solusi" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="bobot_kategori" class="form-label">Bobot Kategori</label>
-                                <input type="number" step="0.01" name="bobot_kategori" class="form-control"
-                                    id="bobot_kategori" required>
+                                <textarea type="text" name="solusi" class="form-control" id="solusi" rows="5" cols="50" required></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </form><!-- End General Form Elements -->

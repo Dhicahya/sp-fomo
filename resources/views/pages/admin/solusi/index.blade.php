@@ -31,7 +31,6 @@
                                         <th scope="col">No</th>
                                         <th scope="col">Kategori</th>
                                         <th scope="col">Solusi</th>
-                                        <th scope="col">Bobot</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -41,7 +40,6 @@
                                             <th scope="row">{{ $index + 1 }}</th>
                                             <td>{{ $item->kategori }}</td>
                                             <td>{{ $item->solusi }}</td>
-                                            <td>{{ $item->bobot_kategori }}</td>
                                             <td>
                                                 <a class="btn btn-success" href="{{ route('solusi.edit', $item) }}">
                                                     <i class="bi bi-pencil-square"></i>

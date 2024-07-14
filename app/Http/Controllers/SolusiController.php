@@ -29,7 +29,6 @@ class SolusiController extends Controller
         $request->validate([
             'kategori' => 'required|string',
             'solusi' => 'required|string',
-            'bobot_kategori' => 'required|numeric'
         ]);
         Solusi::create($request->all());
         return redirect()->route('solusi.index');
@@ -59,7 +58,6 @@ class SolusiController extends Controller
         $request->validate([
             'kategori' => 'required|string',
             'solusi' => 'required|string',
-            'bobot_kategori' => 'required|numeric'
         ]);
 
         $solusi->update($request->all());

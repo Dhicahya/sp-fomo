@@ -84,7 +84,7 @@
 
             <!-- Revenue Card -->
             <div class="col-xxl-4 col-md-6">
-                <div class="card info-card revenue-card">
+                <div class="card info-card sales-card">
 
                     <a href="{{ route('pertanyaan.index') }}">
 
@@ -104,6 +104,51 @@
 
                 </div>
             </div><!-- End Revenue Card -->
+
+            <!-- Sales Card -->
+            <div class="col-xxl-4 col-md-6">
+                <div class="card info-card revenue-card">
+                    <a href="{{ route('solusi.index') }}">
+
+                        <div class="card-body">
+                            <h5 class="card-title">Kategori dan Solusi</h5>
+
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-lightbulb"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>{{ App\Models\Solusi::count() }}</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                    </a>
+                </div>
+            </div><!-- End Sales Card -->
+
+                        <!-- Customers Card -->
+            <div class="col-xxl-4 col-xl-12">
+
+                <div class="card info-card customers-card">
+                    <a href="{{ route('indexRandom.index') }}">
+                        <div class="card-body">
+                            <h5 class="card-title">Index Random</h5>
+
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-file-earmark-bar-graph"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>{{ App\Models\IndexRandom::count() }}</h6>
+                                </div>
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+
+            </div><!-- End Customers Card -->
 
         </div>
     </section>

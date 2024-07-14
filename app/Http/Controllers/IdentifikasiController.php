@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Identifikasi;
 use App\Models\Pasien;
 use App\Models\Pertanyaan;
+use App\Models\Solusi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -125,7 +126,62 @@ class IdentifikasiController extends Controller
         session()->put('total_pakar_by_kriteria', $total_pakar_by_kriteria);
         session()->put('total_sementara_by_kriteria', $total_sementara_by_kriteria);
 
-        return redirect()->route('hasil-diagnosa', ['pasien_id' => $pasien_id]);
+        // Panggil fungsi kategoriHasil untuk menentukan kategori hasil
+        return $this->kategoriHasil($request);
+    }
+
+    public function kategoriHasil(Request $request)
+    {
+        // Inisialisasi variabel total nilai user
+        $total_nilai_user = 0;
+
+        // Ambil data identifikasi berdasarkan pasien
+        $identifikasi = Identifikasi::where('pasien_id', $request->input('pasien_id'))->get();
+
+        // Hitung total nilai user
+        foreach ($identifikasi as $item) {
+            $total_nilai_user += $item->nilai_user;
+        }
+
+        // Hitung jumlah total pertanyaan
+        $total_pertanyaan = Pertanyaan::count();
+
+        // Tentukan rentang kategori
+        $rentang = $total_pertanyaan / 3;
+
+        $kategori = '';
+
+        // Tentukan kategori berdasarkan total nilai user
+        if ($total_nilai_user <= $rentang) {
+            $solusi = Solusi::where('kategori', 'Rendah')->first();
+        } elseif ($total_nilai_user <= 2 * $rentang) {
+            $solusi = Solusi::where('kategori', 'Sedang')->first();
+        } else {
+            $solusi = Solusi::where('kategori', 'Tinggi')->first();
+        }
+
+        if ($solusi) {
+            $kategori = $solusi->solusi;
+        } else {
+            $kategori = 'Tidak terdefinisi';
+        }
+
+        // Hitung presentase dari total_nilai_user terhadap total_pertanyaan
+        $presentase = ($total_nilai_user / $total_pertanyaan) * 100;
+
+        // Simpan kategori dan presentase ke session atau ke view
+        session()->put('kategori', $kategori);
+        session()->put('presentase', $presentase);
+
+        // Update the Pasien model with the results
+        $pasien = Pasien::find($request->input('pasien_id'));
+        $pasien->hasil_tes = $total_nilai_user;
+        $pasien->presentasi = $presentase;
+        $pasien->kriteria_id = $solusi->kriteria_id ?? null; // Assuming Solusi has a kriteria_id
+        $pasien->solusi_id = $solusi->id ?? null;
+        $pasien->save();
+
+        return redirect()->route('hasil-diagnosa', ['pasien_id' => $request->input('pasien_id')]);
     }
 
     public function hasilDiagnosa($pasien_id)
@@ -159,6 +215,10 @@ class IdentifikasiController extends Controller
         // Urutkan nilai_akhir_kriteria dari yang terbesar ke yang terkecil
         arsort($nilai_akhir_kriteria);
 
+        // Ambil kategori dan presentase dari session
+        $kategori = session()->get('kategori', 'Tidak tersedia');
+        $presentase = session()->get('presentase', 0);
+
         $data = [
             'title' => 'Hasil Diagnosa',
             'pasien' => $pasien,
@@ -166,6 +226,8 @@ class IdentifikasiController extends Controller
             'total_sementara_by_kriteria' => $total_sementara_by_kriteria,
             'nilai_akhir_kriteria' => $nilai_akhir_kriteria,
             'deskripsi_kriteria' => $deskripsi_kriteria, // Include the descriptions in the data array
+            'kategori' => $kategori, // Include the kategori in the data array
+            'presentase' => $presentase, // Include the presentase in the data array
         ];
 
         return view('pages.identifikasi.hasil', $data);
