@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pasien;
 use App\Models\User;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
@@ -16,7 +17,13 @@ class ProfilController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return view('pages.profil', compact('user'));
+        $user_id = $user->id;
+
+        $pasiens = Pasien::where('user_id', $user_id)
+            ->whereNotNull('kriteria_id')
+            ->get();
+
+        return view('pages.profil', compact('user', 'pasiens'));
     }
 
     /**

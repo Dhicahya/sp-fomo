@@ -24,7 +24,6 @@
                     <p class="card-text">Silakan pilih kriteria di bawah ini untuk memulai perbandingan indikator yang
                         diinginkan.</p>
                     <form class="ui form mt-4" action="{{ route('relindikator.index') }}" method="get">
-                        @csrf
                         <div class="mb-3">
                             <select name="kriteria_id" class="form-select" required onchange="this.form.submit()">
                                 <option value="">-- Pilih Kriteria --</option>

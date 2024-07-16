@@ -18,7 +18,7 @@
         </li><!-- End Kelola Data Pengguna Page Nav -->
         
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#">
+            <a class="nav-link collapsed" href="{{ route('pasien.index') }}">
                 <i class="bi bi-clock-history"></i>
                 <span>Riwayat Tes</span>
             </a>

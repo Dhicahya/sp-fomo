@@ -1092,13 +1092,14 @@ section {
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
-#footer {
-    background: #fff;
-    padding: 0 0 30px 0;
-    color: #47536e;
-    font-size: 14px;
-    background: #eff2f8;
-}
+    #footer {
+        position: relative;
+        background: #fff;
+        padding: 0 0 30px 0;
+        color: #47536e;
+        font-size: 14px;
+        background: #eff2f8;
+    }
 
 #footer .footer-newsletter {
     padding: 50px 0;

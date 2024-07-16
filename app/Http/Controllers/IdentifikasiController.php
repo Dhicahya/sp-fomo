@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Identifikasi;
+use App\Models\Kriteria;
 use App\Models\Pasien;
 use App\Models\Pertanyaan;
 use App\Models\Solusi;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -134,13 +136,18 @@ class IdentifikasiController extends Controller
     {
         // Inisialisasi variabel total nilai user
         $total_nilai_user = 0;
+        $nilai_kriteria = [];
 
         // Ambil data identifikasi berdasarkan pasien
         $identifikasi = Identifikasi::where('pasien_id', $request->input('pasien_id'))->get();
 
-        // Hitung total nilai user
+        // Hitung total nilai user dan nilai per kriteria
         foreach ($identifikasi as $item) {
             $total_nilai_user += $item->nilai_user;
+            if (!isset($nilai_kriteria[$item->kriteria_id])) {
+                $nilai_kriteria[$item->kriteria_id] = 0;
+            }
+            $nilai_kriteria[$item->kriteria_id] += $item->nilai_user;
         }
 
         // Hitung jumlah total pertanyaan
@@ -148,8 +155,6 @@ class IdentifikasiController extends Controller
 
         // Tentukan rentang kategori
         $rentang = $total_pertanyaan / 3;
-
-        $kategori = '';
 
         // Tentukan kategori berdasarkan total nilai user
         if ($total_nilai_user <= $rentang) {
@@ -160,26 +165,26 @@ class IdentifikasiController extends Controller
             $solusi = Solusi::where('kategori', 'Tinggi')->first();
         }
 
-        if ($solusi) {
-            $kategori = $solusi->solusi;
-        } else {
-            $kategori = 'Tidak terdefinisi';
-        }
+        // Tentukan kategori solusi
+        $kategori = $solusi ? $solusi->solusi : 'Tidak terdefinisi';
 
         // Hitung presentase dari total_nilai_user terhadap total_pertanyaan
         $presentase = ($total_nilai_user / $total_pertanyaan) * 100;
 
-        // Simpan kategori dan presentase ke session atau ke view
-        session()->put('kategori', $kategori);
-        session()->put('presentase', $presentase);
+        // Temukan kriteria dengan nilai terbesar
+        $kriteria_id_terbesar = array_keys($nilai_kriteria, max($nilai_kriteria))[0];
 
-        // Update the Pasien model with the results
+        // Update model Pasien dengan hasil
         $pasien = Pasien::find($request->input('pasien_id'));
-        $pasien->hasil_tes = $total_nilai_user;
+        $pasien->hasil_tes = $kriteria_id_terbesar;
         $pasien->presentasi = $presentase;
-        $pasien->kriteria_id = $solusi->kriteria_id ?? null; // Assuming Solusi has a kriteria_id
+        $pasien->kriteria_id = $kriteria_id_terbesar;
         $pasien->solusi_id = $solusi->id ?? null;
         $pasien->save();
+
+        // Simpan kategori dan presentase ke session
+        session()->put('kategori', $kategori);
+        session()->put('presentase', $presentase);
 
         return redirect()->route('hasil-diagnosa', ['pasien_id' => $request->input('pasien_id')]);
     }
@@ -191,13 +196,13 @@ class IdentifikasiController extends Controller
             ->with(['pertanyaan', 'pertanyaan.indikator', 'pertanyaan.kriteria'])
             ->get();
 
-        // Hitung total_sementara untuk setiap kriteria
+        // Calculate total_sementara for each kriteria
         $identifikasi_by_kriteria = [];
         $total_sementara_by_kriteria = [];
         $nilai_akhir_kriteria = [];
-        $deskripsi_kriteria = []; // Array untuk deskripsi kriteria
+        $deskripsi_kriteria = []; // Array for kriteria descriptions
 
-        // Ambil deskripsi kriteria
+        // Retrieve kriteria descriptions
         foreach ($identifikasi as $item) {
             $kriteria = $item->pertanyaan->kriteria->nama;
             $deskripsi_kriteria[$kriteria] = $item->pertanyaan->kriteria->deskripsi; // Assuming there's a 'deskripsi' field in the Kriteria model
@@ -212,12 +217,30 @@ class IdentifikasiController extends Controller
             $nilai_akhir_kriteria[$kriteria] += $item->nilai_hasil;
         }
 
-        // Urutkan nilai_akhir_kriteria dari yang terbesar ke yang terkecil
+        // Sort nilai_akhir_kriteria from highest to lowest
         arsort($nilai_akhir_kriteria);
 
-        // Ambil kategori dan presentase dari session
+        // Retrieve kategori and presentase from session
         $kategori = session()->get('kategori', 'Tidak tersedia');
         $presentase = session()->get('presentase', 0);
+
+        // Retrieve solusi based on the kategori
+        $solusi = Solusi::where('kategori', $kategori)->first();
+
+        // Get the highest kriteria
+        $max_kriteria = array_keys($nilai_akhir_kriteria)[0] ?? 'Tidak tersedia';
+        $max_nilai = $nilai_akhir_kriteria[$max_kriteria] ?? 0;
+
+        // Find kriteria_id based on the max_kriteria
+        $kriteria = Kriteria::where('nama', $max_kriteria)->first();
+        $kriteria_id = $kriteria ? $kriteria->id : null;
+
+        if ($kriteria_id) {
+            // Update Pasien with the highest kriteria and its nilai
+            $pasien->hasil_tes = $max_nilai;
+            $pasien->kriteria_id = $kriteria_id;
+            $pasien->save();
+        }
 
         $data = [
             'title' => 'Hasil Diagnosa',
@@ -228,8 +251,59 @@ class IdentifikasiController extends Controller
             'deskripsi_kriteria' => $deskripsi_kriteria, // Include the descriptions in the data array
             'kategori' => $kategori, // Include the kategori in the data array
             'presentase' => $presentase, // Include the presentase in the data array
+            'solusi' => $solusi ? $solusi->kategori : 'Tidak tersedia' // Include the solusi in the data array
         ];
 
         return view('pages.identifikasi.hasil', $data);
+    }
+
+    public function detailHasil($pasien_id)
+    {
+         $pasien = Pasien::find($pasien_id);
+        $identifikasi = Identifikasi::where('pasien_id', $pasien_id)
+            ->with(['pertanyaan', 'pertanyaan.indikator', 'pertanyaan.kriteria'])
+            ->get();
+
+        // Calculate total_sementara for each kriteria
+        $identifikasi_by_kriteria = [];
+        $total_sementara_by_kriteria = [];
+        $nilai_akhir_kriteria = [];
+        $deskripsi_kriteria = []; // Array for kriteria descriptions
+
+        // Retrieve kriteria descriptions
+        foreach ($identifikasi as $item) {
+            $kriteria = $item->pertanyaan->kriteria->nama;
+            $deskripsi_kriteria[$kriteria] = $item->pertanyaan->kriteria->deskripsi; // Assuming there's a 'deskripsi' field in the Kriteria model
+
+            if (!isset($identifikasi_by_kriteria[$kriteria])) {
+                $identifikasi_by_kriteria[$kriteria] = [];
+                $total_sementara_by_kriteria[$kriteria] = 0;
+                $nilai_akhir_kriteria[$kriteria] = 0;
+            }
+            $identifikasi_by_kriteria[$kriteria][] = $item;
+            $total_sementara_by_kriteria[$kriteria] += $item->pertanyaan->indikator->nilai_pakar * $item->nilai_user;
+            $nilai_akhir_kriteria[$kriteria] += $item->nilai_hasil;
+        }
+    }
+
+    public function cetak($id)
+    {
+        $pasien = Pasien::with('kriteria')->find($id);
+        $hasil_tes = session()->get('hasil_tes', []);
+
+        $identifikasis = Identifikasi::with('pertanyaan')->where('pasien_id', $id)->get();
+        $groupedIdentifikasis = $identifikasis->groupBy('pertanyaan_id')->map(function ($group) {
+            return $group->first();
+        });
+
+        $data = [
+            'title' => 'Hasil Identifikasi',
+            'pasien' => $pasien,
+            'pertanyaan' => $groupedIdentifikasis,
+            'hasil_tes' => $hasil_tes,
+        ];
+
+        $pdf = Pdf::loadView('pages.identifikasi.cetak', $data);
+        return $pdf->download('hasil_identifikasi.pdf');
     }
 }

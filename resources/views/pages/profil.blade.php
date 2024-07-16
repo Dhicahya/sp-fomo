@@ -1,23 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-5">
+    <div class="container mt-5 min-vh-100">
         <div class="row justify-content-center mt-5">
             <div class="col-md-8 my-5">
                 <div class="card">
-                    <div class="card-header text-white"
-                        style="background-color: #5777ba;">
+                    <div class="card-header text-white" style="background-color: #5777ba;">
                         <h5 class="mb-0">PROFIL</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4 text-center">
                                 @if ($user->image_path)
-                                    <img src="/storage/{{ $user->image_path }}" alt="Profile Picture" class="rounded-circle mb-3"
-                                        style="width: 150px; height: 150px; object-fit: cover;">
+                                    <img src="/storage/{{ $user->image_path }}" alt="Profile Picture" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
                                 @else
-                                    <img src="/img/undraw_profile.svg" alt="Profile Picture" class="rounded-circle mb-3"
-                                        style="width: 150px; height: 150px;">
+                                    <img src="/img/undraw_profile.svg" alt="Profile Picture" class="rounded-circle mb-3" style="width: 150px; height: 150px;">
                                 @endif
                             </div>
                             <div class="col-md-8">
@@ -33,8 +30,7 @@
                                 <h4 class="mb-2">{{ $user->name }}</h4>
                                 <p class="text-muted mb-2">{{ '@' . $user->username }}</p>
                                 <p class="text-muted mb-2">{{ $user->email }}</p>
-                                <button type="button" class="btn btn-primary-custom rounded-pill" data-bs-toggle="modal"
-                                    data-bs-target="#editProfileModal">
+                                <button type="button" class="btn btn-primary-custom rounded-pill" data-bs-toggle="modal" data-bs-target="#editProfileModal">
                                     Edit Profil
                                 </button>
                             </div>
@@ -43,8 +39,6 @@
                 </div>
             </div>
         </div>
-        <h3>Riwayat Tes</h3>
-        <hr style="height: 3px; background-color: black; border-radius: 5px;">
     </div>
 
     <!-- Edit Profile Modal -->
@@ -70,28 +64,23 @@
                         @method('PUT')
                         <div class="form-group mb-3">
                             <label for="inputName">Nama</label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                value="{{ $user->name }}" required>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" required>
                         </div>
                         <div class="form-group mb-3">
                             <label for="inputUsername">Username</label>
-                            <input type="text" class="form-control" id="username" name="username"
-                                value="{{ $user->username }}" required>
+                            <input type="text" class="form-control" id="username" name="username" value="{{ $user->username }}" required>
                         </div>
                         <div class="form-group mb-3">
                             <label for="inputEmail">Email</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                value="{{ $user->email }}" required>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
                         </div>
                         <div class="form-group mb-3">
                             <label for="inputPassword">Password</label>
-                            <input type="password" class="form-control" id="password" name="password"
-                                placeholder="Password">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                         </div>
                         <div class="form-group mb-3">
                             <label for="inputConfirmPassword">Konfirmasi Password</label>
-                            <input type="password" class="form-control" id="password-confirm"
-                                name="password_confirmation" placeholder="Konfirmasi Password">
+                            <input type="password" class="form-control" id="password-confirm" name="password_confirmation" placeholder="Konfirmasi Password">
                         </div>
                         <div class="form-group mb-3">
                             <label for="inputProfilePicture">Foto Profil</label>

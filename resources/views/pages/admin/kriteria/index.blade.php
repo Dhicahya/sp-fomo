@@ -21,7 +21,7 @@
             <div class="card-body">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="card-title ">Data Kriteria</h5>
-                <a href="{{ route('kriteria.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                <a href="{{ route('kriteria.create') }}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                   <i class="bi bi-plus-lg"></i> Kriteria</a>
               </div>
               

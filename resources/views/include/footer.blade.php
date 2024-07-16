@@ -1,4 +1,5 @@
     <!-- ======= Footer ======= -->
+    <div class="position-sticky">
     <footer id="footer" class="mt-auto">
         <div class="container py-4">
             <div class="copyright">
@@ -8,4 +9,6 @@
                 Developed by Muhammad Teguh Adi Cahya
             </div>
         </div>
-    </footer><!-- End Footer -->
+    </footer>
+    </div>
+<!-- End Footer -->

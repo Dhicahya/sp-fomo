@@ -46,21 +46,22 @@
                                     @endforeach
 
                                     <div class="alert alert-info text-center">
-                                        <strong>Kriteria Terbesar:</strong> {{ $max_kriteria }} (Nilai: {{ $max_nilai }})
+                                        <strong>Kriteria dari Self-determination Terbesarmu adalah:</strong> {{ $max_kriteria }} (Nilai: {{ $max_nilai }})
                                     </div>
                                     <div class="alert alert-light">
                                         <strong>Deskripsi:</strong> {{ $deskripsi_kriteria[$max_kriteria] ?? 'Deskripsi tidak tersedia' }}
                                     </div>
                                     <div class="alert alert-warning text-center mt-4">
-                                        <strong>Presentase Nilai User:</strong> {{ number_format($presentase, 2) }}%
+                                        <strong>Tingkat Self-determination :</strong> {{ number_format($presentase, 2) }} % ({{ $presentase <= 33 ? 'Rendah' : ($presentase <= 66 ? 'Sedang' : 'Tinggi') }})
                                     </div>
-                                    <div class="alert alert-success text-left mt-4">
+                                    <div class="alert alert-success text-center mt-4">
                                         <strong>Kategori Hasil:</strong> {{ $kategori }}
                                     </div>
                                 </div>
                                 <div class="card-footer text-center">
                                     <a href="{{ route('home') }}" class="btn btn-secondary me-2">Kembali</a>
-                                    <button onclick="window.print();" class="btn btn-success">Cetak Hasil</button>
+                                    <a href="#" class="btn btn-warning me-2">Detail</a>
+                                    <a href="{{ route('cetak-hasil', $pasien->id) }}" class="btn btn-success">Cetak Hasil</a>
                                 </div>
                             </div>
                         </div>
