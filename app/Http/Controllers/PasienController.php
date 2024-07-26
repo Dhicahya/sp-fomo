@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Identifikasi;
 use App\Models\Pasien;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PasienController extends Controller
 {
@@ -26,7 +27,7 @@ class PasienController extends Controller
 
         $pasien = Pasien::findOrFail($id);
         $pasien->delete();
-
+        Alert::success('Sukses!', 'Data Berhasil Dihapus');
         return redirect()->back()->with('success', 'Data pasien berhasil dihapus.');
     }
 }

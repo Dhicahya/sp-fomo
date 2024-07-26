@@ -259,7 +259,7 @@ class IdentifikasiController extends Controller
 
     public function detailHasil($pasien_id)
     {
-         $pasien = Pasien::find($pasien_id);
+        $pasien = Pasien::find($pasien_id);
         $identifikasi = Identifikasi::where('pasien_id', $pasien_id)
             ->with(['pertanyaan', 'pertanyaan.indikator', 'pertanyaan.kriteria'])
             ->get();

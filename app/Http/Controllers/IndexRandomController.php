@@ -4,30 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\IndexRandom;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class IndexRandomController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $data = IndexRandom::all();
         return view('pages.admin.random-index.index', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         $indexRandom = IndexRandom::all();
         return view('pages.admin.random-index.create', compact('indexRandom'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         $request->validate([
@@ -35,28 +31,23 @@ class IndexRandomController extends Controller
             'nilai' => 'numeric|string',
         ]);
         IndexRandom::create($request->all());
+        Alert::success('Sukses!', 'Data Berhasil Disimpan');
         return redirect()->route('indexRandom.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(IndexRandom $indexRandom)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(IndexRandom $indexRandom)
     {
         return view('pages.admin.random-index.update', compact('indexRandom'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, IndexRandom $indexRandom)
     {
         $request->validate([
@@ -65,15 +56,15 @@ class IndexRandomController extends Controller
         ]);
 
         $indexRandom->update($request->all());
+        Alert::success('Sukses!', 'Data Berhasil Diubah');
         return redirect()->route('indexRandom.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(IndexRandom $indexRandom)
     {
         $indexRandom->delete();
+        Alert::success('Sukses!', 'Data Berhasil Dihapus');
         return redirect()->route('indexRandom.index');
     }
 }

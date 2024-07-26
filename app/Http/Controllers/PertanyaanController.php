@@ -6,6 +6,7 @@ use App\Models\Pertanyaan;
 use App\Models\Indikator;
 use App\Models\Kriteria;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PertanyaanController extends Controller
 {
@@ -38,6 +39,7 @@ class PertanyaanController extends Controller
         ]);
 
         Pertanyaan::create($data);
+        Alert::success('Sukses!', 'Data Berhasil Disimpan');
         return redirect()->route('pertanyaan.index');
     }
 
@@ -60,12 +62,14 @@ class PertanyaanController extends Controller
         ]);
 
         $pertanyaan->update($data);
+        Alert::success('Sukses!', 'Data Berhasil Diubah');
         return redirect()->route('pertanyaan.index');
     }
 
     public function destroy(Pertanyaan $pertanyaan)
     {
         $pertanyaan->delete();
+        Alert::success('Sukses!', 'Data Berhasil Dihapus');
         return redirect()->route('pertanyaan.index');
     }
 }

@@ -39,6 +39,60 @@
                 </div>
             </div>
         </div>
+
+        <h3 class="">Riwayat Tes ({{ $user->pasien->count() }})</h3>
+        <hr style="height:3px;background-color:black; border-radius:5px;">
+        
+        @if ($user->pasien->count())
+            <div class="table-responsive">
+                <table class="table datatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama Pasien</th>
+                            <th scope="col">Usia</th>
+                            <th scope="col">Kriteria</th>
+                            <th scope="col">Hasil Tes</th>
+                            <th scope="col">Persentase</th>
+                            <th scope="col">Kategori</th>
+                            <th scope="col">Tanggal Tes</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($user->pasien as $index)
+                            <tr>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $index->nama_pasien }}</td>
+                                <td>{{ $index->umur }}</td>
+                                <td>{{ $index->kriteria_id }}</td>
+                                <td>{{ $index->hasil_tes }}</td>
+                                <td>{{ $index->presentasi }}%</td>
+                                <td>{{ $index->solusi->solusi ?? 'tidak tersedia' }}</td>
+                                <td>{{ $index->created_at->format('d-m-Y') }}</td>
+                                <td>
+                                    <a class="btn btn-success" href="{{ route('pasien.show', $index->id) }}">
+                                        <i class="bi bi-search"></i>
+                                    </a>
+                                    <a class="btn btn-danger"
+                                        onclick="deleteData('{{ route('pasien.delete', $index->id) }}')">
+                                        <i class="bi bi-trash3"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="container mt-5">
+                <div class="my-5">
+                    <div class="mt-5">
+                        <p class="text-center fs-3">Tidak Ada Riwayat Tes</p>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
 
     <!-- Edit Profile Modal -->

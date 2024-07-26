@@ -19,6 +19,12 @@
                     <form method="POST" action="{{ route('password.confirm') }}" data-aos="fade-up">
                         @csrf
 
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
                         <div class="mb-3">
                             <div class="input-group">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Masukkan Password" required autocomplete="current-password">

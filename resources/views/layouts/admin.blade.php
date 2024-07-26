@@ -15,6 +15,8 @@
 
 <body>
 
+    @include('sweetalert::alert')
+
     @include('include.admin.navbar')
 
     @include('include.admin.sidebar')

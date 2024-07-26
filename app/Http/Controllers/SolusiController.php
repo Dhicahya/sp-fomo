@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Solusi;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SolusiController extends Controller
 {
@@ -12,18 +13,14 @@ class SolusiController extends Controller
         return view('pages.admin.solusi.index', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         $solusi = Solusi::all();
         return view('pages.admin.solusi.create', compact('solusi'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         $request->validate([
@@ -31,28 +28,23 @@ class SolusiController extends Controller
             'solusi' => 'required|string',
         ]);
         Solusi::create($request->all());
+        Alert::success('Sukses!', 'Data Berhasil Disimpan');
         return redirect()->route('solusi.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Solusi $solusi)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Solusi $solusi)
     {
         return view('pages.admin.solusi.update', compact('solusi'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, Solusi $solusi)
     {
         $request->validate([
@@ -61,15 +53,15 @@ class SolusiController extends Controller
         ]);
 
         $solusi->update($request->all());
+        Alert::success('Sukses!', 'Data Berhasil Diubah');
         return redirect()-> route('solusi.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Solusi $solusi)
     {
         $solusi->delete();
+        Alert::success('Sukses!', 'Data Berhasil Dihapus');
         return redirect()->route('solusi.index');    
     }
 }

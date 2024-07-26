@@ -18,6 +18,7 @@
                     </div>
                     <form method="POST" action="{{ route('password.update') }}" data-aos="fade-up">
                         @csrf
+                        
 
                         <input type="hidden" name="token" value="{{ $token }}">
 

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisterController extends Controller
 {
@@ -76,7 +77,7 @@ class RegisterController extends Controller
     protected function registered(request $request, $user)
     {
         $this->guard()->logout();
-
+        Alert::success('Sukses!', 'Registrasi Berhasil');
         return redirect('/login');
     }
 }

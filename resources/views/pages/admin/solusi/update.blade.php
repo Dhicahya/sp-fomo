@@ -33,7 +33,7 @@
                             <div class="mb-3">
                                 <label for="solusi" class="form-label">Solusi</label>
                                 <textarea type="text" name="solusi" class="form-control" id="solusi" rows="5" cols="50"
-                                    value="{{ $solusi->solusi }}" required></textarea>
+                                    required>{{ $solusi->solusi }}</textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Ubah</button>
                         </form><!-- End General Form Elements -->
