@@ -77,7 +77,8 @@ class RegisterController extends Controller
     protected function registered(request $request, $user)
     {
         $this->guard()->logout();
-        Alert::success('Sukses!', 'Registrasi Berhasil');
+        Alert::success('Registrasi Sukses!', 'Silahkan Login');
         return redirect('/login');
     }
+
 }
