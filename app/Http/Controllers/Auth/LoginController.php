@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -39,6 +40,7 @@ class LoginController extends Controller
     protected function authenticated($request, $user)
     {
         // route untuk admin dan guest setelah login
+        Alert::success('Sukses!', 'Login Berhasil');
         return $user->role == 'admin' ? redirect()->route('dashboard') : redirect()->route('home');
     }
 }

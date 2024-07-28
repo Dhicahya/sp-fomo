@@ -1,15 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Kriteria;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KriteriaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-     public function index()
+    public function index()
     {
         $data = Kriteria::all();
         return view('pages.admin.kriteria.index', compact('data'));
@@ -31,6 +33,7 @@ class KriteriaController extends Controller
         ]);
 
         Kriteria::create($data);
+        Alert::success('Sukses!', 'Data Berhasil Disimpan');
         return redirect()->route('kriteria.index');
     }
 
@@ -49,12 +52,14 @@ class KriteriaController extends Controller
         ]);
 
         $kriterium->update($data);
+        Alert::success('Sukses!', 'Data Berhasil Diubah');
         return redirect()->route('kriteria.index');
     }
 
     public function destroy(Kriteria $kriteria)
     {
         $kriteria->delete();
+        Alert::success('Sukses!', 'Data Berhasil Dihapus');
         return redirect()->route('kriteria.index');
     }
 }

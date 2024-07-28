@@ -67,7 +67,10 @@ class ProfilController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $pasien = $user->pasien; // Mendapatkan riwayat tes dari model User
+
+        return view('profile', compact('user', 'pasien'));
     }
 
     /**

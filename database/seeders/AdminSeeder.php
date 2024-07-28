@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,6 +19,7 @@ class AdminSeeder extends Seeder
             'name' => 'admin',
             'role' => 'admin',
             'password' => 'admin123',
+            'created_at' => Carbon::now(),
         ]);
     }
 }

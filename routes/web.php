@@ -79,8 +79,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::put('profil', [ProfilController::class, 'store'])->name('profilStore');
 
-    // Route::get('/pilih-gejala', [TesController::class, 'showForm'])->name('pilih-gejala.form');
-    // Route::post('/pilih-gejala', [TesController::class, 'submitForm'])->name('pilih-gejala.submit');
 
     Route::get('/identifikasi', [IdentifikasiController::class, 'index'])->name('form-identitas');
     Route::post('/identifikasi/create-pasien', [IdentifikasiController::class, 'createPasien'])->name('isi-identitas');

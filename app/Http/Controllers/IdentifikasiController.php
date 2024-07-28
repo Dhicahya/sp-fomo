@@ -78,17 +78,17 @@ class IdentifikasiController extends Controller
         // Inisialisasi variabel untuk perhitungan Bayes berdasarkan kriteria
         $nilai_pakar_by_kriteria = [];
         $nilai_user_by_kriteria = [];
-        $nilai_sementara_by_kriteria = [];
+        $nilai_semesta_by_kriteria = [];
         $total_pakar_by_kriteria = [];
         $total_sementara_by_kriteria = [];
 
-        // Hitung nilai pakar dan user untuk setiap kriteria
+        // Hitung nilai pakar, nilai user, dan total nilai pakar untuk setiap kriteria
         foreach ($pertanyaans as $p) {
             $kriteria = $p->kriteria->nama;
             if (!isset($nilai_pakar_by_kriteria[$kriteria])) {
                 $nilai_pakar_by_kriteria[$kriteria] = [];
                 $nilai_user_by_kriteria[$kriteria] = [];
-                $nilai_sementara_by_kriteria[$kriteria] = [];
+                $nilai_semesta_by_kriteria[$kriteria] = [];
                 $total_pakar_by_kriteria[$kriteria] = 0;
             }
             $nilai_pakar_by_kriteria[$kriteria][$p->id] = $p->indikator->nilai_pakar;
@@ -96,21 +96,22 @@ class IdentifikasiController extends Controller
             $total_pakar_by_kriteria[$kriteria] += $p->indikator->nilai_pakar;
         }
 
-        // Hitung nilai semesta P(Hi) dan ΣHi P(E|Hi) * P(Hi) untuk setiap kriteria
+        // Hitung nilai semesta (P(E|Hi)) dan ΣHi P(E|Hi) * P(Hi) untuk setiap kriteria
         foreach ($nilai_pakar_by_kriteria as $kriteria => $nilai_pakar) {
             $total_sementara = 0;
             foreach ($nilai_pakar as $id => $nilai) {
-                $nilai_sementara_by_kriteria[$kriteria][$id] = $nilai / $total_pakar_by_kriteria[$kriteria];
-                $total_sementara += $nilai_sementara_by_kriteria[$kriteria][$id] * $nilai_user_by_kriteria[$kriteria][$id];
+                $nilai_semesta_by_kriteria[$kriteria][$id] = $nilai / $total_pakar_by_kriteria[$kriteria];
+                $total_sementara += $nilai_semesta_by_kriteria[$kriteria][$id] * $nilai_user_by_kriteria[$kriteria][$id];
             }
             $total_sementara_by_kriteria[$kriteria] = $total_sementara;
         }
 
         // Hitung P(Hi|E) dan hasil diagnosis untuk setiap kriteria
         $hasil_diagnosis_by_kriteria = [];
-        foreach ($nilai_sementara_by_kriteria as $kriteria => $nilai_sementara) {
-            foreach ($nilai_sementara as $id => $nilai) {
-                $p_hi_e = ($total_sementara_by_kriteria[$kriteria] != 0) ? $nilai / $total_sementara_by_kriteria[$kriteria] : 0;
+        foreach ($nilai_semesta_by_kriteria as $kriteria => $nilai_semesta) {
+            $total_sementara = $total_sementara_by_kriteria[$kriteria];
+            foreach ($nilai_semesta as $id => $nilai) {
+                $p_hi_e = ($total_sementara != 0) ? $nilai * $nilai_user_by_kriteria[$kriteria][$id] / $total_sementara : 0;
                 $hasil_diagnosis_by_kriteria[$kriteria][$id] = $p_hi_e * $nilai_pakar_by_kriteria[$kriteria][$id];
             }
         }
@@ -147,7 +148,7 @@ class IdentifikasiController extends Controller
             if (!isset($nilai_kriteria[$item->kriteria_id])) {
                 $nilai_kriteria[$item->kriteria_id] = 0;
             }
-            $nilai_kriteria[$item->kriteria_id] += $item->nilai_user;
+            $nilai_kriteria[$item->kriteria_id] += $item->nilai_hasil; // Menggunakan nilai_hasil untuk kriteria
         }
 
         // Hitung jumlah total pertanyaan
@@ -257,53 +258,57 @@ class IdentifikasiController extends Controller
         return view('pages.identifikasi.hasil', $data);
     }
 
-    public function detailHasil($pasien_id)
-    {
-         $pasien = Pasien::find($pasien_id);
-        $identifikasi = Identifikasi::where('pasien_id', $pasien_id)
-            ->with(['pertanyaan', 'pertanyaan.indikator', 'pertanyaan.kriteria'])
-            ->get();
 
-        // Calculate total_sementara for each kriteria
-        $identifikasi_by_kriteria = [];
-        $total_sementara_by_kriteria = [];
-        $nilai_akhir_kriteria = [];
-        $deskripsi_kriteria = []; // Array for kriteria descriptions
-
-        // Retrieve kriteria descriptions
-        foreach ($identifikasi as $item) {
-            $kriteria = $item->pertanyaan->kriteria->nama;
-            $deskripsi_kriteria[$kriteria] = $item->pertanyaan->kriteria->deskripsi; // Assuming there's a 'deskripsi' field in the Kriteria model
-
-            if (!isset($identifikasi_by_kriteria[$kriteria])) {
-                $identifikasi_by_kriteria[$kriteria] = [];
-                $total_sementara_by_kriteria[$kriteria] = 0;
-                $nilai_akhir_kriteria[$kriteria] = 0;
-            }
-            $identifikasi_by_kriteria[$kriteria][] = $item;
-            $total_sementara_by_kriteria[$kriteria] += $item->pertanyaan->indikator->nilai_pakar * $item->nilai_user;
-            $nilai_akhir_kriteria[$kriteria] += $item->nilai_hasil;
-        }
-    }
 
     public function cetak($id)
     {
         $pasien = Pasien::with('kriteria')->find($id);
         $hasil_tes = session()->get('hasil_tes', []);
+        $kategori = session()->get('kategori', 'Tidak tersedia');
+        $presentase = session()->get('presentase', 0);
 
         $identifikasis = Identifikasi::with('pertanyaan')->where('pasien_id', $id)->get();
         $groupedIdentifikasis = $identifikasis->groupBy('pertanyaan_id')->map(function ($group) {
             return $group->first();
         });
 
+        // Calculate nilai_akhir_kriteria and retrieve deskripsi
+        $nilai_akhir_kriteria = [];
+        $deskripsi_kriteria = [];
+        foreach ($identifikasis as $identifikasi) {
+            $kriteria = $identifikasi->pertanyaan->kriteria->nama;
+            $deskripsi = $identifikasi->pertanyaan->kriteria->deskripsi;
+
+            // Calculate nilai_akhir_kriteria
+            if (!isset($nilai_akhir_kriteria[$kriteria])) {
+                $nilai_akhir_kriteria[$kriteria] = 0;
+            }
+            $nilai_akhir_kriteria[$kriteria] += $identifikasi->nilai_hasil;
+
+            // Collect deskripsi_kriteria
+            if (!isset($deskripsi_kriteria[$kriteria])) {
+                $deskripsi_kriteria[$kriteria] = $deskripsi;
+            }
+        }
+
+        // Sort nilai_akhir_kriteria from highest to lowest
+        arsort($nilai_akhir_kriteria);
+
         $data = [
             'title' => 'Hasil Identifikasi',
             'pasien' => $pasien,
             'pertanyaan' => $groupedIdentifikasis,
             'hasil_tes' => $hasil_tes,
+            'nilai_akhir_kriteria' => $nilai_akhir_kriteria,
+            'deskripsi_kriteria' => $deskripsi_kriteria, // Add this line
+            'kategori' => $kategori,
+            'presentase' => $presentase,
         ];
 
         $pdf = Pdf::loadView('pages.identifikasi.cetak', $data);
         return $pdf->download('hasil_identifikasi.pdf');
     }
+
+
+
 }

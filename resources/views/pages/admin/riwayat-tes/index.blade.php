@@ -52,7 +52,7 @@
                                             <td>{{ $index->solusi->solusi ?? 'tidak tersedia' }}</td>
                                             <td>{{ $index->created_at->format('d-m-Y') }}</td>
                                             <td>
-                                                <a class="btn btn-success" href="">
+                                                <a class="btn btn-success" href="{{ route('hasil-diagnosa', $index->id) }}">
                                                     <i class="bi bi-search"></i>
                                                 </a>
                                                 <a class="btn btn-danger"

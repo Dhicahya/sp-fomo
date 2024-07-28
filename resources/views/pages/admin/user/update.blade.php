@@ -73,10 +73,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password (isi jika ingin ganti password)</label>
-                                <input type="text" name="password" class="form-control" id="password" value="">
-                            </div>
                             <button type="submit" class="btn btn-primary">Ubah</button>
                         </form>
                         <!-- End General Form Elements -->

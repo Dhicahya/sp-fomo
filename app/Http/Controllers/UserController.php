@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class UserController extends Controller
 {
@@ -41,11 +44,12 @@ class UserController extends Controller
         if (@$data['image_path']) {
             $ext = $request->file('image_path')->getClientOriginalExtension();
             // save to storage
-            $data['image_path'] = $request->file('image_path')->storeAs('public/profile', time().Str::slug($request->nama) . '.' . $ext);
+            $data['image_path'] = $request->file('image_path')->storeAs('public/profile', time() . Str::slug($request->nama) . '.' . $ext);
             $data['image_path'] = str_replace('public/', '', $data['image_path']);
         }
 
         User::create($data);
+        Alert::success('Sukses!', 'Data Berhasil Disimpan');
         return redirect()->route('user.index');
     }
 
@@ -79,18 +83,19 @@ class UserController extends Controller
             'role' => 'required|in:admin,user',
         ]);
 
-        if ($data['password'] == ''){
+        if ($data['password'] == '') {
             unset($data['password']);
         }
 
         if (@$data['image_path']) {
             $ext = $request->file('image_path')->getClientOriginalExtension();
             // save to storage
-            $data['image_path'] = $request->file('image_path')->storeAs('public/profile', time().Str::slug($request->nama) . '.' . $ext);
+            $data['image_path'] = $request->file('image_path')->storeAs('public/profile', time() . Str::slug($request->nama) . '.' . $ext);
             $data['image_path'] = str_replace('public/', '', $data['image_path']);
         }
 
         $user->update($data);
+        Alert::success('Sukses!', 'Data Berhasil Diubah');
         return redirect()->route('user.index');
     }
 
@@ -100,6 +105,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+        Alert::success('Sukses!', 'Data Berhasil Dihapus');
         return redirect()->route('user.index');
     }
 }

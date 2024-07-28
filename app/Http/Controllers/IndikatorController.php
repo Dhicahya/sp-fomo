@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Indikator;
 use App\Models\Kriteria;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class IndikatorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $data = Indikator::with('kriteria')->get();
@@ -43,6 +42,7 @@ class IndikatorController extends Controller
         }
 
         $indikator->save();
+        Alert::success('Sukses!', 'Data Berhasil Disimpan');
         return redirect()->route('indikator.index');
     }
 
@@ -73,21 +73,19 @@ class IndikatorController extends Controller
         }
 
         $indikator->save();
+        Alert::success('Sukses!', 'Data Berhasil Diubah');
         return redirect()->route('indikator.index');
     }
 
     public function destroy(Indikator $indikator)
     {
         $indikator->delete();
+        Alert::success('Sukses!', 'Data Berhasil Dihapus');
         return redirect()->route('indikator.index');
     }
 
     public function nilai_pakar(Request $request, Indikator $indikator)
     {
-        // $data = $request->validate([
-        //     'pv_indikator' => 'required|numeric',
-        //     'pv_kriteria' => 'required|numeric',
-        // ]);
 
         $pv_kriteria = $indikator->kriteria->pv_kriteria;
         $indikator->nilai_pakar = $indikator->pv_indikator * $pv_kriteria;
