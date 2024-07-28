@@ -55,7 +55,11 @@ class SolusiController extends Controller
 
         $solusi->update($request->all());
         Alert::success('Sukses!', 'Data Berhasil Diubah');
+<<<<<<< HEAD
         return redirect()->route('solusi.index');
+=======
+        return redirect()-> route('solusi.index');
+>>>>>>> cb0fcc46ccc0343f64a5a3ed8fa6440f0a2de2f6
     }
 
 
@@ -63,6 +67,10 @@ class SolusiController extends Controller
     {
         $solusi->delete();
         Alert::success('Sukses!', 'Data Berhasil Dihapus');
+<<<<<<< HEAD
         return redirect()->route('solusi.index');
+=======
+        return redirect()->route('solusi.index');    
+>>>>>>> cb0fcc46ccc0343f64a5a3ed8fa6440f0a2de2f6
     }
 }
